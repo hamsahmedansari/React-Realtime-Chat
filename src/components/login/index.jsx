@@ -6,20 +6,28 @@ class Login extends Component {
     super(props);
     this.state = {};
   }
+  shuffle = array => {
+    return array.sort(() => Math.random() - 0.5);
+  };
   render() {
+    let colorArr = [
+      "color-1",
+      "color-2",
+      "color-3",
+      "color-4",
+      "color-5",
+      "color-6",
+      "color-7"
+    ];
     return (
       <div className="login">
         <div className="flex-container">
           <div className="item head flex-container">
             <div className="item">
               <div className="background">
-                <div className="ball-1" />
-                <div className="ball-2" />
-                <div className="ball-3" />
-                <div className="ball-4" />
-                <div className="ball-5" />
-                <div className="ball-6" />
-                <div className="ball-7" />
+                {this.shuffle(colorArr).map((color, i) => (
+                  <div className={`ball-${i + 1} ${color}`} key={i} />
+                ))}
               </div>
             </div>
           </div>

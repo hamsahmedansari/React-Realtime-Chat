@@ -44,44 +44,58 @@
       }
       .ball-1 {
         transform: scale(3.4);
-        background: #fab334;
         top: -20%;
         left: -10%;
       }
+      .color-1 {
+        background: #fab334;
+      }
+      .color-2 {
+        background: #1f3071;
+      }
+      .color-3 {
+        background: #16b3cb;
+      }
+      .color-4 {
+        background: #e54522;
+      }
+      .color-5 {
+        background: #9c27b0;
+      }
+      .color-6 {
+        background: #e91e63;
+      }
+      .color-7 {
+        background: #8bc34a;
+      }
       .ball-2 {
         transform: scale(4.4);
-        background: #1f3071;
         bottom: -34%;
         left: -40%;
       }
       .ball-3 {
         transform: scale(3.4);
-        background: #16b3cb;
         top: 20%;
         left: 70%;
       }
       .ball-4 {
         transform: scale(2.4);
         top: 70%;
-        background: #e54522;
         left: 70%;
       }
       .ball-5 {
         transform: scale(2);
         top: -8%;
-        background: #9c27b0;
         left: 99%;
       }
       .ball-6 {
         transform: scale(1.4);
         top: 40%;
-        background: #e91e63;
         left: -29%;
       }
       .ball-7 {
         transform: scale(2.4);
         top: 99%;
-        background: #8bc34a;
         left: 50%;
       }
       @keyframes ball {
