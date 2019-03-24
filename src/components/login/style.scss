@@ -1,0 +1,76 @@
+.login {
+  position: fixed;
+  width: 95%;
+  height: 95%;
+  top: 0;
+  left: 0;
+  padding: 2.5%;
+
+  > div {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    > div {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  .head {
+    background: #6faee0;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #f9fafc;
+    i {
+      font-size: 40px;
+    }
+  }
+  .body {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #373f5b;
+    button {
+      margin: 5px;
+      width: 120px;
+    }
+    .social-btn {
+      :nth-child(1):not(i) {
+        background-color: #df4a32;
+      }
+      :nth-child(2):not(i) {
+        background-color: #3a579a;
+      }
+      :nth-child(3):not(i) {
+        background-color: #0085e0;
+      }
+      :nth-child(4):not(i) {
+        background-color: #2a4763;
+      }
+      button {
+        transition: all ease-in-out 0.1s;
+      }
+    }
+    .social-btn:hover {
+      button {
+        filter: blur(2px);
+        transform: scale(0.95);
+      }
+      button:hover {
+        transform: scale(1.05);
+        filter: blur(0px);
+      }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .login {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0%;
+  }
+}

@@ -1,33 +1,88 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700");
+* {
+  margin: 0;
+  padding: 0;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+*:not(i) {
+  font-family: "Ubuntu", sans-serif;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.item {
+  order: 1;
+}
+.btn {
+  position: relative;
+
+  display: block;
+
+  overflow: hidden;
+  padding: 10px;
+  border-width: 0;
+  outline: none;
+  border-radius: 100px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  background-color: #6faee0;
+  color: #f9fafc;
+
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.btn:hover,
+.btn:focus {
+  background-color: #6faee0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn > * {
+  position: relative;
+}
+
+.btn span {
+  display: block;
+  padding: 12px 24px;
+}
+
+.btn:before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 0;
+  padding-top: 0;
+
+  border-radius: 100%;
+
+  background-color: rgba(236, 240, 241, 0.3);
+
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.btn:active:before {
+  width: 120%;
+  padding-top: 120%;
+
+  transition: width 0.2s ease-out, padding-top 0.2s ease-out;
+}
+.btn:disabled {
+  cursor: not-allowed;
+  text-decoration: line-through;
+  background-color: #000 !important;
+  color: #fff;
+}
+.btn.primary {
+  background-color: #ffd460;
+}
+
+.btn.primary:hover,
+.btn.primary:focus {
+  background-color: #ffe6a8;
 }
