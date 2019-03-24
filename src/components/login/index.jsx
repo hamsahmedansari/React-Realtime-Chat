@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import "./style.scss";
+import HandWriting from "../common/handWriting";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      title: ""
+    };
   }
   shuffle = array => {
     return array.sort(() => Math.random() - 0.5);
   };
+
   render() {
     let colorArr = [
       "color-1",
@@ -26,8 +30,21 @@ class Login extends Component {
             <div className="item">
               <div className="background">
                 {this.shuffle(colorArr).map((color, i) => (
-                  <div className={`ball-${i + 1} ${color}`} key={i} />
+                  <div className={`ball ball-${i + 1} ${color}`} key={i} />
                 ))}
+                <div className="flex-container title">
+                  <div className="item">
+                    <h1>
+                      <HandWriting text="connect." speed="1000" />
+                    </h1>
+                  </div>
+                  <div className="item">
+                    <h4>Technology</h4>
+                    <div className="flex-container technology">
+                      <img src="" alt="" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
