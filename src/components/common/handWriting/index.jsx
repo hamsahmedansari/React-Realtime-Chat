@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 class HandWriting extends Component {
   constructor(props) {

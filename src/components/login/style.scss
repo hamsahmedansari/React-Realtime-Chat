@@ -27,7 +27,7 @@
       height: 100%;
     }
     .background {
-      background: #e91e63;
+      background: #a680a1;
       position: relative;
       overflow: hidden;
       width: 100%;
@@ -43,6 +43,9 @@
         justify-content: space-around;
         h1 {
           font-size: 50px;
+        }
+        h4 {
+          font-weight: 400;
         }
       }
       .ball {
@@ -135,16 +138,16 @@
       min-width: 120px;
     }
     .social-btn {
-      :nth-child(1):not(i) {
+      :nth-child(1):not(svg) {
         background-color: #df4a32;
       }
-      :nth-child(2):not(i) {
+      :nth-child(2):not(svg) {
         background-color: #3a579a;
       }
-      :nth-child(3):not(i) {
+      :nth-child(3):not(svg) {
         background-color: #0085e0;
       }
-      :nth-child(4):not(i) {
+      :nth-child(4):not(svg) {
         background-color: #2a4763;
       }
       button {

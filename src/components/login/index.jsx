@@ -41,7 +41,27 @@ class Login extends Component {
                   <div className="item">
                     <h4>Technology</h4>
                     <div className="flex-container technology">
-                      <img src="" alt="" />
+                      <div className="item">
+                        <i className="fab fa-html5" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-css3-alt" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-js" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-node" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-react" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-git" />
+                      </div>
+                      <div className="item">
+                        <i className="fab fa-gripfire" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -51,19 +71,19 @@ class Login extends Component {
           <div className="item body flex-container">
             <div className="item social-btn">
               <button className="btn ">
-                Login with <i className="fa fa-google-plus" />
+                Login with <i className="fab fa-google-plus" />
               </button>
 
               <button className="btn ">
-                Login with <i className="fa fa-facebook" />
+                Login with <i className="fab fa-facebook-f" />
               </button>
 
               <button className="btn ">
-                Login with <i className="fa fa-twitter" />
+                Login with <i className="fab fa-twitter" />
               </button>
 
               <button className="btn ">
-                Login with <i className="fa fa-github" />
+                Login with <i className="fab fa-github" />
               </button>
             </div>
             <div className="item">
@@ -71,7 +91,7 @@ class Login extends Component {
             </div>
             <div className="item">
               <button className="btn ">
-                Login as Guess <i className="fa fa-frown-o	" />
+                Login as Guess <i className="fab fa-frown" />
               </button>
             </div>
           </div>
