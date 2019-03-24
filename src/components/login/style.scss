@@ -1,30 +1,103 @@
 .login {
   position: fixed;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  padding: 2.5%;
+  padding: 0%;
 
   > div {
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     height: 100%;
     > div {
-      width: 100%;
-      height: 50%;
+      height: 100%;
+      width: 50%;
     }
   }
   .head {
-    background: #6faee0;
     align-items: center;
     text-align: center;
     justify-content: center;
     color: #f9fafc;
-    i {
-      font-size: 40px;
+    > div {
+      width: 100%;
+      height: 100%;
+    }
+    .background {
+      background: #f9fafc;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      div {
+        position: absolute;
+        border-radius: 100%;
+        opacity: 0.9;
+        width: 200px;
+        height: 200px;
+        animation: ball 1s ease-in-out;
+      }
+      .ball-1 {
+        transform: scale(3.4);
+        background: #fab334;
+        top: -20%;
+        left: -10%;
+      }
+      .ball-2 {
+        transform: scale(4.4);
+        background: #1f3071;
+        bottom: -34%;
+        left: -40%;
+      }
+      .ball-3 {
+        transform: scale(3.4);
+        background: #16b3cb;
+        top: 20%;
+        left: 70%;
+      }
+      .ball-4 {
+        transform: scale(2.4);
+        top: 70%;
+        background: #e54522;
+        left: 70%;
+      }
+      .ball-5 {
+        transform: scale(2);
+        top: -8%;
+        background: #9c27b0;
+        left: 99%;
+      }
+      .ball-6 {
+        transform: scale(1.4);
+        top: 40%;
+        background: #e91e63;
+        left: -29%;
+      }
+      .ball-7 {
+        transform: scale(2.4);
+        top: 99%;
+        background: #8bc34a;
+        left: 50%;
+      }
+      @keyframes ball {
+        0% {
+          width: 200px;
+          height: 200px;
+        }
+        50% {
+          width: 400px;
+          height: 400px;
+        }
+        100% {
+          width: 200px;
+          height: 200px;
+        }
+      }
     }
   }
   .body {
@@ -34,7 +107,7 @@
     color: #373f5b;
     button {
       margin: 5px;
-      width: 120px;
+      min-width: 120px;
     }
     .social-btn {
       :nth-child(1):not(i) {
@@ -67,10 +140,15 @@
 }
 @media only screen and (max-width: 600px) {
   .login {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    padding: 0%;
+    > div {
+      flex-direction: column;
+      > div {
+        height: 60%;
+        width: 100%;
+      }
+      > :nth-child(1) {
+        height: 40%;
+      }
+    }
   }
 }

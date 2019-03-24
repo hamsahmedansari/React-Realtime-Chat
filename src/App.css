@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
 }
+body {
+  background: #fff;
+}
 *:not(i) {
   font-family: "Ubuntu", sans-serif;
 }

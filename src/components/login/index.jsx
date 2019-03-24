@@ -11,9 +11,17 @@ class Login extends Component {
       <div className="login">
         <div className="flex-container">
           <div className="item head flex-container">
-            <h2 className="item">
-              <i className="fa fa-comments-o" /> Messenger App
-            </h2>
+            <div className="item">
+              <div className="background">
+                <div className="ball-1" />
+                <div className="ball-2" />
+                <div className="ball-3" />
+                <div className="ball-4" />
+                <div className="ball-5" />
+                <div className="ball-6" />
+                <div className="ball-7" />
+              </div>
+            </div>
           </div>
           <div className="item body flex-container">
             <div className="item social-btn">
@@ -34,7 +42,12 @@ class Login extends Component {
               </button>
             </div>
             <div className="item">
-              <h2>head</h2>
+              <h1>OR</h1>
+            </div>
+            <div className="item">
+              <button className="btn ">
+                Login as Guess <i className="fa fa-frown-o	" />
+              </button>
             </div>
           </div>
         </div>
