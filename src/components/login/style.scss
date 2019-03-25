@@ -47,6 +47,14 @@
         h4 {
           font-weight: 400;
         }
+        .technology {
+          align-items: center;
+          justify-content: center;
+          font-size: 30px;
+          .item {
+            margin: 5px;
+          }
+        }
       }
       .ball {
         position: absolute;
@@ -129,47 +137,69 @@
     }
   }
   .body {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
     color: #373f5b;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
+    h1 {
+      font-size: 40px;
+    }
     button {
-      margin: 5px;
-      min-width: 120px;
-    }
-    .social-btn {
-      :nth-child(1):not(svg) {
-        background-color: #df4a32;
+      width: 100%;
+      margin: 3px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      padding: 0px;
+      padding-left: 25px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-around;
+      background: #2a4663;
+      span {
+        display: inline-flex;
       }
-      :nth-child(2):not(svg) {
-        background-color: #3a579a;
-      }
-      :nth-child(3):not(svg) {
-        background-color: #0085e0;
-      }
-      :nth-child(4):not(svg) {
-        background-color: #2a4763;
-      }
-      button {
-        transition: all ease-in-out 0.1s;
+      svg {
+        font-size: 20px;
       }
     }
-    .social-btn:hover {
+    > :nth-child(3) {
+      > :nth-child(1) {
+        background-color: #3a5999;
+      }
+      > :nth-child(2) {
+        background-color: #5aa4eb;
+      }
+      > :nth-child(3) {
+        background-color: #cb4023;
+      }
+      > :nth-child(4) {
+        background-color: #333333;
+      }
+    }
+    > :nth-child(3):hover {
       button {
-        filter: blur(2px);
-        transform: scale(0.95);
+        filter: blur(5px);
+        transform: scale(1);
       }
       button:hover {
-        transform: scale(1.05);
         filter: blur(0px);
+        transform: scale(1.2);
       }
+    }
+    > div {
+      text-align: center;
+      width: 60%;
     }
   }
 }
 @media only screen and (max-width: 600px) {
   .login {
+    .body {
+      height: 60%;
+    }
     > div {
-      flex-direction: column;
+      flex-direction: row;
       > div {
         height: 60%;
         width: 100%;

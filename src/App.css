@@ -29,8 +29,7 @@ body {
   cursor: pointer;
   background-color: #6faee0;
   color: #f9fafc;
-
-  transition: background-color 0.3s;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn:hover,

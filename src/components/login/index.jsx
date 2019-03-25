@@ -69,30 +69,34 @@ class Login extends Component {
             </div>
           </div>
           <div className="item body flex-container">
-            <div className="item social-btn">
-              <button className="btn ">
-                Login with <i className="fab fa-google-plus" />
-              </button>
-
-              <button className="btn ">
-                Login with <i className="fab fa-facebook-f" />
-              </button>
-
-              <button className="btn ">
-                Login with <i className="fab fa-twitter" />
-              </button>
-
-              <button className="btn ">
-                Login with <i className="fab fa-github" />
+            {/* <div className="item flex-container"> */}
+            <div className="item">
+              <button className="btn flex-container">
+                <i className="far fa-grin-tears item" />
+                <span className="item">Guess Login</span>
               </button>
             </div>
             <div className="item">
-              <h1>OR</h1>
+              <h2>OR</h2>
             </div>
             <div className="item">
-              <button className="btn ">
-                Login as Guess <i className="fab fa-frown" />
+              <button className="btn flex-container">
+                <i className="fab fa-facebook-square item" />
+                <span className="item">Login With Facebook</span>
               </button>
+              <button className="btn flex-container">
+                <i className="fab fa-twitter-square item" />
+                <span className="item">Login With Twitter</span>
+              </button>
+              <button className="btn flex-container">
+                <i className="fab fa-google-plus-square item" />
+                <span className="item">Login With Google +</span>
+              </button>
+              <button className="btn flex-container">
+                <i className="fab fa-github-square item" />
+                <span className="item">Login With GitHub</span>
+              </button>
+              {/* </div> */}
             </div>
           </div>
         </div>
