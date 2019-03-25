@@ -35,7 +35,7 @@ class Login extends Component {
                 <div className="flex-container title">
                   <div className="item">
                     <h1>
-                      <HandWriting text="connect." speed="1000" />
+                      <HandWriting delay="400" text="connect." speed="1000" />
                     </h1>
                   </div>
                   <div className="item">
@@ -71,15 +71,20 @@ class Login extends Component {
           <div className="item body flex-container">
             {/* <div className="item flex-container"> */}
             <div className="item">
+              <h1>Connect.</h1>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Officiis nihil placeat quia possimus praesentium sapiente
+                inventore non et eos ullam tempora mollitia suscipit reiciendis
+                nam accusantium, quaerat dolorem culpa repellendus.
+              </p>
+            </div>
+            <div className="item">{/* <h3>Login</h3> */}</div>
+            <div className="item">
               <button className="btn flex-container">
                 <i className="far fa-grin-tears item" />
                 <span className="item">Guess Login</span>
               </button>
-            </div>
-            <div className="item">
-              <h2>OR</h2>
-            </div>
-            <div className="item">
               <button className="btn flex-container">
                 <i className="fab fa-facebook-square item" />
                 <span className="item">Login With Facebook</span>
