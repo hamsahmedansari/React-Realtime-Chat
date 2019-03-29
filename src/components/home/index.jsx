@@ -18,6 +18,26 @@ class Home extends Component {
               <div className="item">
                 <h2>CONNECT</h2>
               </div>
+              {/* Profile */}
+              <div className="item">
+                <Profile shortName={true} style={{ padding: "10px" }} />
+              </div>
+              <div className="item">
+                <hr />
+              </div>
+              <div className="item">
+                <div className="flex-container">
+                  <div className="item active">
+                    <p>New Message (2)</p>
+                  </div>
+                  <div className="item">
+                    <p>Peoples (2)</p>
+                  </div>
+                  <div className="item">
+                    <p>Logout</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="item">
@@ -33,51 +53,25 @@ class Home extends Component {
                   />
                 </div>
               </div>
+              {/* Profile */}
+              <div className="item">
+                <Profile />
+              </div>
             </div>
           </div>
           <div className="item">
             <div className="flex-container">
               {/* Header */}
               <div className="item">
-                <div className="profile flex-container">
-                  <div className="item">
-                    <img src="/assets/images/1.jpeg" alt="" />
-                  </div>
-                  <div className="item">
-                    <h4>Hams Ahmed Ansari</h4>
-                    <p>
-                      <i className="fas fa-dot-circle" /> Online
-                    </p>
-                  </div>
-                </div>
+                <Profile />
+              </div>
+              {/* Profile */}
+              <div className="item">
+                <Profile />
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="header flex-container">
-          <div className="item">
-            <h2 className="logo">CONNECT</h2>
-          </div>
-          <div className="item">
-            <div className="flex-container search">
-              <i className="fas fa-search item" />
-              <input type="text " className="item" placeholder="Search Here" />
-            </div>
-          </div>
-          <div className="item">
-            <div className="profile flex-container">
-              <div className="item">
-                <img src="/assets/images/1.jpeg" alt="" />
-              </div>
-              <div className="item">
-                <h4>Hams Ahmed Ansari</h4>
-                <p>
-                  <i className="fas fa-dot-circle" /> Online
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   }
