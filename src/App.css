@@ -88,3 +88,6 @@ body {
 .btn.primary:focus {
   background-color: #ffe6a8;
 }
+.d-none {
+  display: none;
+}

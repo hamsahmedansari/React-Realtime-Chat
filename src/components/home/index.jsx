@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Login from "../login";
+// import Login from "../login";
 import "./style.scss";
+import Header from "../common/header";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +10,8 @@ class Home extends Component {
   render() {
     return (
       <div className="home">
-        <Login />
+        {/* <Login /> */}
+        <Header />
       </div>
     );
   }
