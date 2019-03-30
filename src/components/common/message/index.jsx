@@ -6,11 +6,15 @@ class Message extends Component {
     super(props);
     this.state = {};
   }
+  componentDidMount() {
+    this.refs.message.scrollIntoView();
+  }
   render() {
     const { sibling, mine } = this.props;
     return (
       // secondMessage
       <div
+        ref="message"
         className={`message flex-container ${sibling ? "secondMessage" : ""} ${
           mine ? "mine" : ""
         }`}
