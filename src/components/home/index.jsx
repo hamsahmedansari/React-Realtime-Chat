@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./style.scss";
 import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
+import HandWriting from "../common/handWriting";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,9 @@ class Home extends Component {
             <div className="flex-container">
               {/* Header */}
               <div className="item">
-                <h2>CONNECT</h2>
+                <h2>
+                  <HandWriting delay="400" text="CONNECT." speed="1000" />
+                </h2>
               </div>
               {/* Profile */}
               <div className="item">
@@ -55,9 +58,82 @@ class Home extends Component {
                 </div>
               </div>
               {/* Message's */}
-              <div className="item">
-                <MessageBox active={true} />
-                <MessageBox />
+              <div className="item flex-container">
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox active={true} />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
+                <div className="item">
+                  <MessageBox />
+                </div>
               </div>
             </div>
           </div>
