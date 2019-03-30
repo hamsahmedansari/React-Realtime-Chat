@@ -1,0 +1,47 @@
+.typing {
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+  }
+  > .message-body {
+    margin-left: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px 0 #ccc;
+    max-width: 60%;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 15px);
+      left: -15px;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+
+      border-right: 15px solid #fff;
+    }
+  }
+  p {
+    font-family: "Patrick Hand", sans-serif;
+    > svg {
+      animation: isTypingAnimation 0.5s ease-in-out infinite;
+    }
+  }
+  @keyframes isTypingAnimation {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}

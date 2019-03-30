@@ -5,6 +5,7 @@ import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
 import Message from "../common/message";
+import IsTyping from "../common/isTyping";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -192,6 +193,9 @@ class Home extends Component {
                   </div>
                   <div className="item">
                     <Message mine={true} />
+                  </div>
+                  <div className="item">
+                    <IsTyping />
                   </div>
                 </div>
               </div>
