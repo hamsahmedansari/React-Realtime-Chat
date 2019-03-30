@@ -155,11 +155,18 @@
       flex-grow: 2;
       z-index: 1;
       width: 33%;
+      height: 100%;
       > div {
+        position: relative;
+        height: 100%;
+        width: 100%;
+
         // background: #f2f4f8;
         // column-3
         > div {
           background: #f2f4f8;
+          position: absolute;
+          width: 100%;
         }
         > :nth-child(1) {
           // header
@@ -167,11 +174,16 @@
           border-bottom: 1px solid rgba(183, 195, 214, 0.3);
           box-shadow: 6px -3px 25px 0 rgba(183, 195, 214, 0.3);
           z-index: -1;
+          top: 0;
+          left: 0;
           > div {
             padding-left: 20px;
           }
         }
         > :nth-child(2) {
+          top: 70px;
+          height: calc(100% - 128px);
+          left: 0;
           > div {
             flex-direction: column;
             flex-wrap: wrap;
@@ -181,6 +193,8 @@
           }
         }
         > :nth-child(3) {
+          bottom: 0;
+          left: 0;
           background: #fff;
           border-top: 1px solid rgba(183, 195, 214, 0.3);
           border-bottom: 1px solid rgba(183, 195, 214, 0.3);
