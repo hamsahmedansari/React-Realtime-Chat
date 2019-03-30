@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Login from "../login";
 import "./style.scss";
 import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
@@ -36,7 +35,6 @@ class Home extends Component {
     const { isMenu } = this.state;
     return (
       <div className="home">
-        {/* <Login /> */}
         <div className="flex-container">
           <div className="item">
             <div className="flex-container">
