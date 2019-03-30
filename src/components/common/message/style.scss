@@ -61,7 +61,8 @@
 
       border-right: 15px solid #fff;
     }
-    > :nth-child(2) {
+    > :nth-child(2),
+    :nth-child(3) {
       text-align: right;
       font-family: "Segoe UI", sans-serif;
       font-weight: 100;

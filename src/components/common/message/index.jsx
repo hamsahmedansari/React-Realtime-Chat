@@ -23,7 +23,15 @@ class Message extends Component {
             numquam assumenda sapiente. Soluta, doloribus repellendus. Optio
             ratione officiis magnam corrupti adipisci facilis eius!
           </p>
-          <p>14 min ago</p>
+          <p>
+            <span>
+              <strong>Delivered at</strong> &nbsp;
+            </span>
+            14 min ago
+          </p>
+          <p>
+            <strong>Message Not Send</strong>
+          </p>
         </div>
       </div>
     );

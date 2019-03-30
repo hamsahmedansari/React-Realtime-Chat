@@ -64,6 +64,9 @@ class Home extends Component {
                     <p>Peoples (2)</p>
                   </div>
                   <div className="item">
+                    <p>Online (2)</p>
+                  </div>
+                  <div className="item">
                     <p>Logout</p>
                   </div>
                 </div>
