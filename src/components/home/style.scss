@@ -86,7 +86,7 @@
       }
     }
     > :nth-child(2) {
-      flex-grow: 1;
+      flex-grow: 0;
       box-shadow: 16px -6px 11px -15px rgba(183, 195, 214, 0.3);
       > div {
         // column-2
@@ -119,7 +119,7 @@
       }
     }
     > :nth-child(3) {
-      flex-grow: 1;
+      flex-grow: 2;
       > div {
         // column-3
         > :nth-child(1) {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import Login from "../login";
 import "./style.scss";
 import Profile from "../common/profile";
+import MessageBox from "../common/messageBox";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +56,7 @@ class Home extends Component {
               </div>
               {/* Profile */}
               <div className="item">
-                <Profile />
+                <MessageBox />
               </div>
             </div>
           </div>

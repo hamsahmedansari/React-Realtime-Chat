@@ -8,6 +8,7 @@ body {
 }
 *:not(i) {
   font-family: "Ubuntu", sans-serif;
+  color: #656b81;
 }
 .flex-container {
   display: flex;
