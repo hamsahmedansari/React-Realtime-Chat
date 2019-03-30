@@ -7,8 +7,9 @@ class MessageBox extends Component {
     this.state = {};
   }
   render() {
+    const { active } = this.props;
     return (
-      <div className="messageBox flex-container">
+      <div className={`messageBox flex-container ${active ? "active" : ""}`}>
         <div className="item">
           <img src="/assets/images/3.jpeg" alt="" />
         </div>
@@ -18,7 +19,9 @@ class MessageBox extends Component {
         </div>
         <div className="item">
           <p>Dec 12</p>
-          <i className="fas fa-dot-circle" />
+          <p>
+            <i className="fas fa-dot-circle" />
+          </p>
         </div>
       </div>
     );

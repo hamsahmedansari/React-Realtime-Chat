@@ -6,9 +6,13 @@
   padding: 20px;
   position: relative;
   &.active {
+    background: #f1f9fe;
     > :nth-child(2) {
       h4 {
         font-size: 17px;
+      }
+      p {
+        color: rgba(101, 107, 129, 1);
       }
     }
   }
@@ -44,10 +48,19 @@
     }
     p {
       font-size: 13px;
+      color: rgba(101, 107, 129, 0.63);
     }
   }
   > :nth-child(3) {
     flex-grow: 1;
+    font-size: 12px;
+    text-align: right;
+    p {
+      color: rgba(101, 107, 129, 0.63);
+      path {
+        color: #f44336;
+      }
+    }
   }
 }
 

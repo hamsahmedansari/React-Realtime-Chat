@@ -122,12 +122,14 @@
       flex-grow: 2;
       > div {
         // column-3
+        > div {
+          background: #f2f4f8;
+        }
         > :nth-child(1) {
           // header
           height: 70px;
           border-bottom: 1px solid rgba(183, 195, 214, 0.3);
           box-shadow: 6px -3px 25px 0 rgba(183, 195, 214, 0.3);
-          background: #f2f4f8;
           z-index: -1;
           padding-left: 20px;
         }

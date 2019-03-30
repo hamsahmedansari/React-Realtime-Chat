@@ -54,8 +54,9 @@ class Home extends Component {
                   />
                 </div>
               </div>
-              {/* Profile */}
+              {/* Message's */}
               <div className="item">
+                <MessageBox active={true} />
                 <MessageBox />
               </div>
             </div>
@@ -66,10 +67,8 @@ class Home extends Component {
               <div className="item">
                 <Profile />
               </div>
-              {/* Profile */}
-              <div className="item">
-                <Profile />
-              </div>
+              {/* Chat */}
+              <div className="item">{/* <Profile /> */}</div>
             </div>
           </div>
         </div>
