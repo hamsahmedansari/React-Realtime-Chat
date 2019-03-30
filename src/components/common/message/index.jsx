@@ -7,8 +7,12 @@ class Message extends Component {
     this.state = {};
   }
   render() {
+    const { sibling } = this.props;
     return (
-      <div className="message flex-container">
+      // secondMessage
+      <div
+        className={`message flex-container ${sibling ? "secondMessage" : ""}`}
+      >
         <img src="/assets/images/2.jpeg" alt="" className="item" />
         <div className="item">
           <p>
@@ -17,6 +21,7 @@ class Message extends Component {
             numquam assumenda sapiente. Soluta, doloribus repellendus. Optio
             ratione officiis magnam corrupti adipisci facilis eius!
           </p>
+          <p>14 min ago</p>
         </div>
       </div>
     );

@@ -170,7 +170,7 @@
         }
         > :nth-child(1) {
           // header
-          height: 70px;
+          height: 69px;
           border-bottom: 1px solid rgba(183, 195, 214, 0.3);
           box-shadow: 6px -3px 25px 0 rgba(183, 195, 214, 0.3);
           z-index: -1;
@@ -183,6 +183,7 @@
         > :nth-child(2) {
           top: 70px;
           height: calc(100% - 128px);
+          overflow-y: scroll;
           left: 0;
           > div {
             flex-direction: column;
@@ -190,6 +191,23 @@
             align-items: space-between;
             justify-content: center;
             padding: 20px;
+          }
+          &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0);
+            background-color: rgba(255, 255, 255, 0);
+            border: 0;
+          }
+
+          &::-webkit-scrollbar {
+            width: 8px;
+            background-color: rgba(255, 255, 255, 0);
+            border: 0;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: #4ca8e6;
+            border-radius: 10px;
+            border: 0;
           }
         }
         > :nth-child(3) {

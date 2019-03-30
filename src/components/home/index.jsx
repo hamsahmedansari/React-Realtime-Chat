@@ -151,7 +151,13 @@ class Home extends Component {
                     <Message />
                   </div>
                   <div className="item">
+                    <Message sibling={true} />
+                  </div>
+                  <div className="item">
                     <Message />
+                  </div>
+                  <div className="item">
+                    <Message sibling={true} />
                   </div>
                 </div>
               </div>
