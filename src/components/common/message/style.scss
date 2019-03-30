@@ -8,19 +8,41 @@
     img {
       opacity: 0;
     }
-    > :nth-child(2) {
+    > .message-body {
       &::before {
         display: none;
       }
     }
   }
+  // Mine
+  &.mine {
+    flex-direction: row-reverse;
+    > .message-body {
+      margin-right: 20px;
+      margin-left: 0px !important;
+      background: #dee3ee;
 
+      &:before {
+        content: "";
+        left: calc(100%);
+        transform: rotate(180deg);
+        border-right: 10px solid #dee3ee;
+      }
+    }
+  }
+  &.mine.secondMessage {
+    > .message-body {
+      &::before {
+        display: none;
+      }
+    }
+  }
   img {
     width: 60px;
     height: 60px;
     border-radius: 100%;
   }
-  > :nth-child(2) {
+  > .message-body {
     margin-left: 20px;
     background: #fff;
     padding: 15px;

@@ -154,10 +154,10 @@ class Home extends Component {
                     <Message sibling={true} />
                   </div>
                   <div className="item">
-                    <Message />
+                    <Message mine={true} />
                   </div>
                   <div className="item">
-                    <Message sibling={true} />
+                    <Message sibling={true} mine={true} />
                   </div>
                 </div>
               </div>
