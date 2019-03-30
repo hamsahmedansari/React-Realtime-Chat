@@ -144,7 +144,21 @@ class Home extends Component {
                 <Profile />
               </div>
               {/* Chat */}
-              <div className="item">{/* <Profile /> */}</div>
+              <div className="item">test</div>
+              {/* Action */}
+              <div className="item">
+                <div className="flex-container">
+                  <div className="item">
+                    <div className="fas fa-camera" />
+                  </div>
+                  <div className="item">
+                    <textarea placeholder="Enter Message" />
+                  </div>
+                  <div className="item">
+                    <button className="btn ">Send</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
