@@ -8,9 +8,31 @@ import Message from "../common/message";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isMenu: false
+    };
+  }
+
+  handelToggleMenu = () => {
+    const { isMenu } = this.state;
+    this.setState(perState => ({ ...perState, isMenu: !isMenu }));
+  };
+  // Responsive
+  isUnder850px = () => {
+    if (window.innerWidth > 850) {
+      this.setState(perState => ({ ...perState, isMenu: false }));
+    } else {
+      this.setState(perState => ({ ...perState, isMenu: true }));
+    }
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.isUnder850px);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.isUnder850px);
   }
   render() {
+    const { isMenu } = this.state;
     return (
       <div className="home">
         {/* <Login /> */}
@@ -22,15 +44,18 @@ class Home extends Component {
                 <h2>
                   <HandWriting delay="400" text="CONNECT." speed="1000" />
                 </h2>
+                <span onClick={this.handelToggleMenu}>
+                  <i className="fas fa-ellipsis-h " />
+                </span>
               </div>
               {/* Profile */}
-              <div className="item">
+              <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <Profile shortName={true} style={{ padding: "10px" }} />
               </div>
-              <div className="item">
+              <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <hr />
               </div>
-              <div className="item">
+              <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <div className="flex-container">
                   <div className="item active">
                     <p>New Message (2)</p>
@@ -45,7 +70,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="item">
+          <div className={`item ${isMenu ? "d-none" : ""}`}>
             <div className="flex-container">
               {/* Header */}
               <div className="item">

@@ -39,6 +39,9 @@
             width: 130px;
             height: 25px;
           }
+          svg {
+            display: none;
+          }
         }
         > :nth-child(2) {
           margin: 20px 0px;
@@ -254,6 +257,42 @@
           }
         }
       }
+    }
+  }
+  .more-details {
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    font-size: 29px;
+    display: none;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .home {
+    .more-details {
+      display: block;
+    }
+    > div > div {
+      width: 100%;
+    }
+    div > :nth-child(1) > div > :nth-child(1) {
+      position: relative;
+      h2 {
+        margin: auto;
+      }
+      svg {
+        position: absolute;
+        top: 28%;
+        font-size: 30px;
+        right: 2%;
+        display: block;
+        path {
+          color: #fff;
+        }
+      }
+    }
+    > div > :nth-child(2) {
+      height: 300px;
     }
   }
 }

@@ -6,18 +6,10 @@ class MessageBox extends Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    if (this.props.active) {
-      this.refs.message.scrollIntoView();
-    }
-  }
   render() {
     const { active } = this.props;
     return (
-      <div
-        className={`messageBox flex-container ${active ? "active" : ""}`}
-        ref="message"
-      >
+      <div className={`messageBox flex-container ${active ? "active" : ""}`}>
         <div className="item">
           <img src="/assets/images/3.jpeg" alt="" />
         </div>
