@@ -1,0 +1,30 @@
+.message {
+  margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+  }
+  > :nth-child(2) {
+    margin-left: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px 0 #ccc;
+    width: 60%;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 10px);
+      left: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+
+      border-right: 10px solid #fff;
+    }
+  }
+}

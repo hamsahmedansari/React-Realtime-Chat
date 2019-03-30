@@ -154,7 +154,7 @@
     > :nth-child(3) {
       flex-grow: 2;
       z-index: 1;
-
+      width: 33%;
       > div {
         // background: #f2f4f8;
         // column-3
@@ -172,6 +172,13 @@
           }
         }
         > :nth-child(2) {
+          > div {
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: space-between;
+            justify-content: center;
+            padding: 20px;
+          }
         }
         > :nth-child(3) {
           background: #fff;

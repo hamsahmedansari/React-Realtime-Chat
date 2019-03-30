@@ -4,6 +4,7 @@ import "./style.scss";
 import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
+import Message from "../common/message";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +145,16 @@ class Home extends Component {
                 <Profile />
               </div>
               {/* Chat */}
-              <div className="item">test</div>
+              <div className="item">
+                <div className="flex-container">
+                  <div className="item">
+                    <Message />
+                  </div>
+                  <div className="item">
+                    <Message />
+                  </div>
+                </div>
+              </div>
               {/* Action */}
               <div className="item">
                 <div className="flex-container">
