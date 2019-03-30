@@ -24,9 +24,9 @@
 
       &:before {
         content: "";
-        left: calc(100%);
+        left: calc(100% + 3px);
         transform: rotate(180deg);
-        border-right: 10px solid #dee3ee;
+        border-right: 15px solid #dee3ee;
       }
     }
   }
@@ -52,14 +52,14 @@
     &:before {
       content: "";
       position: absolute;
-      top: calc(50% - 10px);
-      left: -10px;
+      top: calc(50% - 15px);
+      left: -15px;
       width: 0;
       height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
 
-      border-right: 10px solid #fff;
+      border-right: 15px solid #fff;
     }
     > :nth-child(2) {
       text-align: right;
@@ -71,6 +71,5 @@
   }
   p {
     font-family: "Patrick Hand", sans-serif;
-    // font-weight: 400;
   }
 }
