@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./style.scss";
+import PropTypes from "prop-types";
 
 class MessageBox extends Component {
   constructor(props) {
@@ -27,5 +28,9 @@ class MessageBox extends Component {
     );
   }
 }
+
+MessageBox.propTypes = {
+  active: PropTypes.bool
+};
 
 export default MessageBox;

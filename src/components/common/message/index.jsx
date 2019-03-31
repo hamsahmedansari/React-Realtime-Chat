@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./style.scss";
+import PropTypes from "prop-types";
 
 class Message extends Component {
   constructor(props) {
@@ -37,5 +38,10 @@ class Message extends Component {
     );
   }
 }
+
+Message.propTypes = {
+  sibling: PropTypes.bool,
+  mine: PropTypes.bool
+};
 
 export default Message;

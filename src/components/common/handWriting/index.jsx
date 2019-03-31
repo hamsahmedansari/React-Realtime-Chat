@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 class HandWriting extends Component {
   constructor(props) {
@@ -28,5 +29,11 @@ class HandWriting extends Component {
     return this.state.title;
   }
 }
+
+HandWriting.propTypes = {
+  text: PropTypes.string,
+  speed: PropTypes.string,
+  delay: PropTypes.string
+};
 
 export default HandWriting;

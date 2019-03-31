@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import PropTypes from "prop-types";
 
 const Profile = props => {
   const { shortName, style } = props;
@@ -18,4 +19,8 @@ const Profile = props => {
   );
 };
 
+Profile.propTypes = {
+  shortName: PropTypes.bool,
+  style: PropTypes.object
+};
 export default Profile;
