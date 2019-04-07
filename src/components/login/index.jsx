@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 import HandWriting from "../common/handWriting";
 
 class Login extends Component {
@@ -82,24 +83,34 @@ class Login extends Component {
             <div className="item">{/* <h3>Login</h3> */}</div>
             <div className="item">
               <button className="btn flex-container">
-                <i className="far fa-grin-tears item" />
-                <span className="item">Guess Login</span>
+                <Link to="/chat" style={{ textDecoration: "none" }}>
+                  <i className="far fa-grin-tears item" />
+                  <span className="item">Guess Login</span>
+                </Link>
               </button>
               <button className="btn flex-container">
-                <i className="fab fa-facebook-square item" />
-                <span className="item">Login With Facebook</span>
+                <Link to="/chat" style={{ textDecoration: "none" }}>
+                  <i className="fab fa-facebook-square item" />
+                  <span className="item">Login With Facebook</span>
+                </Link>
               </button>
               <button className="btn flex-container">
-                <i className="fab fa-twitter-square item" />
-                <span className="item">Login With Twitter</span>
+                <Link to="/chat" style={{ textDecoration: "none" }}>
+                  <i className="fab fa-twitter-square item" />
+                  <span className="item">Login With Twitter</span>
+                </Link>
               </button>
               <button className="btn flex-container">
-                <i className="fab fa-google-plus-square item" />
-                <span className="item">Login With Google +</span>
+                <Link to="/chat" style={{ textDecoration: "none" }}>
+                  <i className="fab fa-google-plus-square item" />
+                  <span className="item">Login With Google +</span>
+                </Link>
               </button>
               <button className="btn flex-container">
-                <i className="fab fa-github-square item" />
-                <span className="item">Login With GitHub</span>
+                <Link to="/chat" style={{ textDecoration: "none" }}>
+                  <i className="fab fa-github-square item" />
+                  <span className="item">Login With GitHub</span>
+                </Link>
               </button>
               {/* </div> */}
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
@@ -66,7 +67,9 @@ class Home extends Component {
                     <p>Online (2)</p>
                   </div>
                   <div className="item">
-                    <p>Logout</p>
+                    <p>
+                      <Link to="/logout">Logout</Link>
+                    </p>
                   </div>
                 </div>
               </div>

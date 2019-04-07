@@ -13,6 +13,7 @@ class Routing extends Component {
       <Switch>
         <Route path="/chat" exact component={Home} />
         <Route path="/login" exact component={Login} />
+        <Route path="/logout" exact component={Login} />
         <Route path="/" exact component={Login} />
         <Redirect to="/404" />
       </Switch>
