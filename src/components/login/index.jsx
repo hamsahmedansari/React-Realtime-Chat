@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import {
+  GoogleLogin,
+  AnonymouslyLogin,
+  FacebookLogin,
+  GithubLogin,
+  TwitterLogin
+} from "../../store/action/auth";
 
 import "./style.scss";
 import HandWriting from "../common/handWriting";
@@ -14,6 +21,27 @@ class Login extends Component {
   }
   shuffle = array => {
     return array.sort(() => Math.random() - 0.5);
+  };
+
+  handelGoogleLogin = () => {
+    const { googleLogin } = this.props;
+    googleLogin();
+  };
+  handelTwitterLogin = () => {
+    const { twitterLogin } = this.props;
+    twitterLogin();
+  };
+  handelFacebookLogin = () => {
+    const { facebookLogin } = this.props;
+    facebookLogin();
+  };
+  handelGithubLogin = () => {
+    const { githubLogin } = this.props;
+    githubLogin();
+  };
+  handelAnonymouslyLogin = () => {
+    const { anonymouslyLogin } = this.props;
+    anonymouslyLogin();
   };
 
   render() {
@@ -84,35 +112,50 @@ class Login extends Component {
             </div>
             <div className="item">{/* <h3>Login</h3> */}</div>
             <div className="item">
-              <button className="btn flex-container">
-                <Link to="/chat" style={{ textDecoration: "none" }}>
-                  <i className="far fa-grin-tears item" />
-                  <span className="item">Guess Login</span>
-                </Link>
+              <button
+                className="btn flex-container"
+                onClick={this.handelAnonymouslyLogin}
+              >
+                {/* <Link to="/chat" style={{ textDecoration: "none" }}> */}
+                <i className="far fa-grin-tears item" />
+                <span className="item">Guess Login</span>
+                {/* </Link> */}
               </button>
-              <button className="btn flex-container">
-                <Link to="/chat" style={{ textDecoration: "none" }}>
-                  <i className="fab fa-facebook-square item" />
-                  <span className="item">Login With Facebook</span>
-                </Link>
+              <button
+                className="btn flex-container"
+                onClick={this.handelFacebookLogin}
+              >
+                {/* <Link to="/chat" style={{ textDecoration: "none" }}> */}
+                <i className="fab fa-facebook-square item" />
+                <span className="item">Login With Facebook</span>
+                {/* </Link> */}
               </button>
-              <button className="btn flex-container">
-                <Link to="/chat" style={{ textDecoration: "none" }}>
-                  <i className="fab fa-twitter-square item" />
-                  <span className="item">Login With Twitter</span>
-                </Link>
+              <button
+                className="btn flex-container"
+                onClick={this.handelTwitterLogin}
+              >
+                {/* <Link to="/chat" style={{ textDecoration: "none" }}> */}
+                <i className="fab fa-twitter-square item" />
+                <span className="item">Login With Twitter</span>
+                {/* </Link> */}
               </button>
-              <button className="btn flex-container">
-                <Link to="/chat" style={{ textDecoration: "none" }}>
-                  <i className="fab fa-google-plus-square item" />
-                  <span className="item">Login With Google +</span>
-                </Link>
+              <button
+                className="btn flex-container"
+                onClick={this.handelGoogleLogin}
+              >
+                {/* <Link to="/chat" style={{ textDecoration: "none" }}> */}
+                <i className="fab fa-google-plus-square item" />
+                <span className="item">Login With Google +</span>
+                {/* </Link> */}
               </button>
-              <button className="btn flex-container">
-                <Link to="/chat" style={{ textDecoration: "none" }}>
-                  <i className="fab fa-github-square item" />
-                  <span className="item">Login With GitHub</span>
-                </Link>
+              <button
+                className="btn flex-container"
+                onClick={this.handelGithubLogin}
+              >
+                {/* <Link to="/chat" style={{ textDecoration: "none" }}> */}
+                <i className="fab fa-github-square item" />
+                <span className="item">Login With GitHub</span>
+                {/* </Link> */}
               </button>
               {/* </div> */}
             </div>
@@ -125,13 +168,32 @@ class Login extends Component {
 
 // export default Login;
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-
   return {
-    auth: state.firebase
+    auth: state.auth
   };
 };
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    googleLogin: () => {
+      dispatch(GoogleLogin());
+    },
+    anonymouslyLogin: () => {
+      dispatch(AnonymouslyLogin());
+    },
+    facebookLogin: () => {
+      dispatch(FacebookLogin());
+    },
+    githubLogin: () => {
+      dispatch(GithubLogin());
+    },
+    twitterLogin: () => {
+      dispatch(TwitterLogin());
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Login);
