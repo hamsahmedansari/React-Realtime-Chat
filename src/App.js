@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Routing from "./route";
+import Routing from "./routes";
 import store from "./store";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all";

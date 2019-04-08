@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./style.scss";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import "./style.scss";
 import HandWriting from "../common/handWriting";
 
 class Login extends Component {
@@ -121,4 +123,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+// export default Login;
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+
+  return {
+    auth: state.firebase
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(Login);
