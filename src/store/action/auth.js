@@ -1,7 +1,7 @@
 import actionAuth from "../constant/auth";
 import actionLoading from "../constant/loading";
 
-const Login = (firebase, firestore, provider, dispatch) => {
+const Login = (firebase, firestore, provider, dispatch, getState) => {
   dispatch({
     type: actionLoading.LOADING_CREATE,
     payload: {
@@ -24,10 +24,15 @@ const Login = (firebase, firestore, provider, dispatch) => {
           lastLogin: new Date().getTime().toString()
         });
     })
-    .then(() => {
+    .then(res => {
+      const { auth } = getState().firebase;
+
       dispatch({
         type: actionAuth.AUTH_LOGIN_SUCCESS,
-        payload: null
+        payload: {
+          fullname: auth.displayName,
+          image: auth.photoURL
+        }
       });
     })
     .catch(err => {
@@ -84,7 +89,7 @@ export function GoogleLogin() {
     const firebase = getFirebase();
     const firestore = getFirestore();
     const provider = new firebase.auth.GoogleAuthProvider();
-    Login(firebase, firestore, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch, getState);
   };
 }
 
@@ -93,7 +98,7 @@ export function FacebookLogin() {
     const firebase = getFirebase();
     const firestore = getFirestore();
     const provider = new firebase.auth.FacebookAuthProvider();
-    Login(firebase, firestore, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch, getState);
   };
 }
 
@@ -102,7 +107,7 @@ export function TwitterLogin() {
     const firebase = getFirebase();
     const firestore = getFirestore();
     const provider = new firebase.auth.TwitterAuthProvider();
-    Login(firebase, firestore, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch, getState);
   };
 }
 
@@ -111,7 +116,7 @@ export function GithubLogin() {
     const firebase = getFirebase();
     const firestore = getFirestore();
     const provider = new firebase.auth.GithubAuthProvider();
-    Login(firebase, firestore, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch, getState);
   };
 }
 
@@ -146,7 +151,10 @@ export function AnonymouslyLogin(pram) {
       .then(data => {
         dispatch({
           type: actionAuth.AUTH_LOGIN_SUCCESS,
-          payload: null
+          payload: {
+            fullname: pram.username,
+            image: pram.img
+          }
         });
       })
       .catch(err => {
@@ -165,6 +173,28 @@ export function AnonymouslyLogin(pram) {
         setTimeout(() => {
           dispatch({ type: actionLoading.LOADING_REMOVE });
         }, 3000);
+      });
+  };
+}
+
+export function getUser() {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    const { uid } = getState().firebase.auth;
+
+    firestore
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then(res => {
+        dispatch({
+          type: actionAuth.AUTH_LOGIN_SUCCESS,
+          payload: {
+            fullname: res.data().fullname,
+            image: res.data().image
+          }
+        });
       });
   };
 }

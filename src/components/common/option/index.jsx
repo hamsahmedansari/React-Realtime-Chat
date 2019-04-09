@@ -13,7 +13,6 @@ class Option extends Component {
     };
   }
   selectImage = ({ currentTarget }) => {
-    console.log(currentTarget);
     const allImage = document.querySelectorAll(".SelectImage");
     allImage.forEach(element => {
       element.classList.remove("active");

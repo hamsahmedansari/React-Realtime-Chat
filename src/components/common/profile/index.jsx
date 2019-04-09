@@ -3,14 +3,16 @@ import "./style.scss";
 import PropTypes from "prop-types";
 
 const Profile = props => {
-  const { shortName, style } = props;
+  const { shortName, style, username, image } = props;
   return (
     <div className="profile flex-container" style={style}>
       <div className="item">
-        <img src="/assets/images/2.jpeg" alt="" />
+        <img src={image} alt="" />
       </div>
       <div className="item">
-        <h4 style={{ maxWidth: shortName ? "90px" : "" }}>Hams Ahmed Asnari</h4>
+        <h4 style={{ maxWidth: shortName ? "90px" : "" }}>
+          {String(username)}
+        </h4>
         <p>
           <i className="fas fa-dot-circle" /> Online
         </p>

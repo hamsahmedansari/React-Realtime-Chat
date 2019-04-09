@@ -1,6 +1,7 @@
 import actionType from "../constant/auth";
 const InitialState = {
-  status: { isError: null, message: null }
+  status: { isError: null, message: null },
+  user: null
 };
 
 export default (state = InitialState, action) => {
@@ -11,7 +12,8 @@ export default (state = InitialState, action) => {
         status: {
           isError: true,
           message: "Successfully Login"
-        }
+        },
+        user: action.payload
       };
     case actionType.AUTH_LOGIN_FAILED:
       return {
@@ -27,7 +29,8 @@ export default (state = InitialState, action) => {
         status: {
           isError: null,
           message: null
-        }
+        },
+        user: null
       };
     default:
       return state;

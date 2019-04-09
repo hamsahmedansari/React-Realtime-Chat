@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import "./style.scss";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUser } from "../../store/action/auth";
+
+import "./style.scss";
+
 import Profile from "../common/profile";
 import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
@@ -28,12 +32,15 @@ class Home extends Component {
   };
   componentDidMount() {
     window.addEventListener("resize", this.isUnder850px);
+    this.props.getUser();
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.isUnder850px);
   }
   render() {
     const { isMenu } = this.state;
+    const user = this.props.user !== null ? this.props.user : {};
+
     return (
       <div className="home">
         <div className="flex-container">
@@ -50,7 +57,12 @@ class Home extends Component {
               </div>
               {/* Profile */}
               <div className={`item ${isMenu ? "d-none" : ""}`}>
-                <Profile shortName={true} style={{ padding: "10px" }} />
+                <Profile
+                  shortName={true}
+                  style={{ padding: "10px" }}
+                  username={user.fullname}
+                  image={user.image}
+                />
               </div>
               <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <hr />
@@ -172,7 +184,7 @@ class Home extends Component {
             <div className="flex-container">
               {/* Header */}
               <div className="item">
-                <Profile />
+                <Profile username={user.fullname} image={user.image} />
               </div>
               {/* Chat */}
               <div className="item">
@@ -222,4 +234,19 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.auth.user
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getUser: () => {
+      dispatch(getUser());
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

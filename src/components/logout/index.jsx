@@ -9,7 +9,7 @@ const Logout = props => {
   if (!props.auth.uid) {
     return <Redirect to="/login" />;
   }
-  return null; //change to loading
+  return <div />; //change to loading
 };
 
 const mapStateToProps = (state, ownProps) => {
