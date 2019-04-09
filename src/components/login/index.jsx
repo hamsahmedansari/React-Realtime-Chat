@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+
 import {
   GoogleLogin,
   AnonymouslyLogin,
@@ -9,6 +10,7 @@ import {
   GithubLogin,
   TwitterLogin
 } from "../../store/action/auth";
+import { LoadingCreate, LoadingRemove } from "../../store/action/loading";
 
 import "./style.scss";
 import HandWriting from "../common/handWriting";
@@ -19,6 +21,15 @@ class Login extends Component {
     this.state = {
       title: ""
     };
+  }
+  componentDidMount() {
+    // if (!this.props.auth.isLoaded) {
+    this.props.loadingCreate();
+    // } else {
+    setTimeout(() => {
+      this.props.loadingRemove();
+    }, 1000);
+    // }
   }
   shuffle = array => {
     return array.sort(() => Math.random() - 0.5);
@@ -55,9 +66,7 @@ class Login extends Component {
       "color-6",
       "color-7"
     ];
-
     const { auth } = this.props;
-
     if (auth.uid) {
       return <Redirect to="/" />;
     }
@@ -197,6 +206,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     twitterLogin: () => {
       dispatch(TwitterLogin());
+    },
+    loadingCreate: () => {
+      dispatch(LoadingCreate());
+    },
+    loadingRemove: () => {
+      dispatch(LoadingRemove());
     }
   };
 };

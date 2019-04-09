@@ -6,6 +6,7 @@ import store from "./store";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all";
 import "./App.css";
+import Common from "./components/common";
 
 class App extends Component {
   render() {
@@ -13,7 +14,11 @@ class App extends Component {
       <div className="App">
         <Provider store={store}>
           <BrowserRouter>
-            <Routing />
+            <div id="routing">
+              <Routing />
+            </div>
+            {/* Common Component i.e modal dialog etc */}
+            <Common />
           </BrowserRouter>
         </Provider>
       </div>
