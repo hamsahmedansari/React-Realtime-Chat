@@ -12,6 +12,7 @@ import Message from "../common/message";
 import IsTyping from "../common/isTyping";
 import NewMessage from "../common/newMessage";
 import People from "../common/people";
+import { getAllUser } from "../../store/action/users";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +37,7 @@ class Home extends Component {
   componentDidMount() {
     window.addEventListener("resize", this.isUnder850px);
     this.props.getUser();
+    this.props.getAllUser();
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.isUnder850px);
@@ -198,6 +200,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getUser: () => {
       dispatch(getUser());
+    },
+    getAllUser: () => {
+      dispatch(getAllUser());
     }
   };
 };

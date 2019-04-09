@@ -8,19 +8,27 @@ class MessageBox extends Component {
     this.state = {};
   }
   render() {
-    const { active, status } = this.props;
+    const { active, status, name, image, message, date, online } = this.props;
     return (
       <div className={`messageBox flex-container ${active ? "active" : ""}`}>
         <div className="item">
-          <img src="/assets/images/3.jpeg" alt="" />
+          <img src={image} alt="" />
         </div>
         <div className="item">
-          <h4>Arqam Ahmed</h4>
-          {!status && <p>Lorem ipsum dolor sit amet consectetur...</p>}
+          <h4>{name}</h4>
+          {!status && (
+            <p>
+              {String(message).length >= 40
+                ? message
+                : String(message)
+                    .slice(0, 40)
+                    .concat("...")}
+            </p>
+          )}
         </div>
         <div className="item">
-          <p>Dec 12</p>
-          <p>
+          <p>date</p>
+          <p className={online ? "online" : ""}>
             <i className="fas fa-dot-circle" />
           </p>
         </div>

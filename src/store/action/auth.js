@@ -21,7 +21,8 @@ const Login = (firebase, firestore, provider, dispatch, getState) => {
           fullname: res.user.displayName,
           image: res.user.photoURL,
           isLogin: true,
-          lastLogin: new Date().getTime().toString()
+          lastLogin: new Date().getTime().toString(),
+          uid: res.user.uid
         });
     })
     .then(res => {
@@ -145,7 +146,8 @@ export function AnonymouslyLogin(pram) {
             fullname: pram.username,
             image: pram.img,
             isLogin: true,
-            lastLogin: new Date().getTime().toString()
+            lastLogin: new Date().getTime().toString(),
+            uid: res.user.uid
           });
       })
       .then(data => {

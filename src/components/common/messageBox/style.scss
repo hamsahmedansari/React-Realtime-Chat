@@ -47,6 +47,7 @@
     h4 {
       font-size: 14px;
       transition: all 0.3s ease-in-out;
+      text-transform: capitalize;
     }
     p {
       font-size: 13px;
@@ -61,6 +62,11 @@
       color: rgba(101, 107, 129, 0.63);
       path {
         color: #f44336;
+      }
+    }
+    .online {
+      path {
+        color: #8bc34a !important;
       }
     }
   }
