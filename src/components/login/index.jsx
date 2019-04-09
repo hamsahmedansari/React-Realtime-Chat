@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 
 import {
   GoogleLogin,
-  AnonymouslyLogin,
   FacebookLogin,
   GithubLogin,
   TwitterLogin
@@ -20,7 +19,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ""
+      title: "",
+      modal: false
     };
   }
   componentDidMount() {
@@ -59,11 +59,20 @@ class Login extends Component {
     githubLogin();
   };
   handelAnonymouslyLogin = () => {
-    const { anonymouslyLogin } = this.props;
-    anonymouslyLogin();
+    this.setState({ modal: true });
+  };
+  disabledModal = () => {
+    this.setState({ modal: false });
   };
 
   render() {
+    const { auth } = this.props;
+    const { modal } = this.state;
+
+    if (auth.uid) {
+      return <Redirect to="/" />;
+    }
+
     let colorArr = [
       "color-1",
       "color-2",
@@ -73,10 +82,6 @@ class Login extends Component {
       "color-6",
       "color-7"
     ];
-    const { auth } = this.props;
-    if (auth.uid) {
-      return <Redirect to="/" />;
-    }
 
     return (
       <React.Fragment>
@@ -187,7 +192,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        <Option />
+        {modal && <Option disabledModal={this.disabledModal} />}
       </React.Fragment>
     );
   }
@@ -205,9 +210,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     googleLogin: () => {
       dispatch(GoogleLogin());
-    },
-    anonymouslyLogin: () => {
-      dispatch(AnonymouslyLogin());
     },
     facebookLogin: () => {
       dispatch(FacebookLogin());

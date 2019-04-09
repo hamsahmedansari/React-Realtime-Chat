@@ -1,7 +1,7 @@
 import actionAuth from "../constant/auth";
 import actionLoading from "../constant/loading";
 
-const Login = (firebase, provider, dispatch) => {
+const Login = (firebase, firestore, provider, dispatch) => {
   dispatch({
     type: actionLoading.LOADING_CREATE,
     payload: {
@@ -13,7 +13,18 @@ const Login = (firebase, provider, dispatch) => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(result => {
+    .then(res => {
+      return firestore
+        .collection("users")
+        .doc(res.user.uid)
+        .set({
+          fullname: res.user.displayName,
+          image: res.user.photoURL,
+          isLogin: true,
+          lastLogin: new Date().getTime().toString()
+        });
+    })
+    .then(() => {
       dispatch({
         type: actionAuth.AUTH_LOGIN_SUCCESS,
         payload: null
@@ -39,70 +50,100 @@ const Login = (firebase, provider, dispatch) => {
 };
 
 export function SignOut() {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     dispatch({
       type: actionLoading.LOADING_CREATE,
       payload: {}
     });
     const firebase = getFirebase();
-
-    firebase
-      .auth()
-      .signOut()
-      .then(data => {
-        dispatch({ type: actionAuth.AUTH_LOGOUT_SUCCESS });
-        dispatch({ type: actionLoading.LOADING_REMOVE });
+    const firestore = getFirestore();
+    const { uid } = getState().firebase.auth;
+    firestore
+      .collection("users")
+      .doc(uid)
+      .set(
+        {
+          isLogin: false
+        },
+        { merge: true }
+      )
+      .then(() => {
+        firebase
+          .auth()
+          .signOut()
+          .then(data => {
+            dispatch({ type: actionAuth.AUTH_LOGOUT_SUCCESS });
+            dispatch({ type: actionLoading.LOADING_REMOVE });
+          });
       });
   };
 }
 
 export function GoogleLogin() {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     const provider = new firebase.auth.GoogleAuthProvider();
-    Login(firebase, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch);
   };
 }
 
 export function FacebookLogin() {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     const provider = new firebase.auth.FacebookAuthProvider();
-    Login(firebase, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch);
   };
 }
 
 export function TwitterLogin() {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     const provider = new firebase.auth.TwitterAuthProvider();
-    Login(firebase, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch);
   };
 }
 
 export function GithubLogin() {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     const provider = new firebase.auth.GithubAuthProvider();
-    Login(firebase, provider, dispatch);
+    Login(firebase, firestore, provider, dispatch);
   };
 }
 
-export function AnonymouslyLogin() {
-  return (dispatch, getState, { getFirebase }) => {
+export function AnonymouslyLogin(pram) {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     dispatch({
       type: actionLoading.LOADING_CREATE,
       payload: {
         status: "warning",
         head: "Please Wait",
-        body: null
+        body: "We are Loading All Your Data it take some time.!!"
       }
     });
+
     const firebase = getFirebase();
+    const firestore = getFirestore();
+
     firebase
       .auth()
       .signInAnonymously()
-      .then(result => {
+      .then(res => {
+        return firestore
+          .collection("users")
+          .doc(res.user.uid)
+          .set({
+            fullname: pram.username,
+            image: pram.img,
+            isLogin: true,
+            lastLogin: new Date().getTime().toString()
+          });
+      })
+      .then(data => {
         dispatch({
           type: actionAuth.AUTH_LOGIN_SUCCESS,
           payload: null

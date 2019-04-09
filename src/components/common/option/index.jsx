@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import "./style.scss";
+import { AnonymouslyLogin } from "../../../store/action/auth";
 
 class Option extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: "",
+      img: ""
+    };
   }
   selectImage = ({ currentTarget }) => {
     console.log(currentTarget);
@@ -13,6 +19,14 @@ class Option extends Component {
       element.classList.remove("active");
     });
     currentTarget.classList.add("active");
+    this.setState({
+      img: currentTarget.alt
+    });
+  };
+  handelUsername = ({ currentTarget }) => {
+    this.setState({
+      username: currentTarget.value
+    });
   };
   render() {
     const images = [
@@ -45,6 +59,8 @@ class Option extends Component {
                   borderRadius: "100px"
                 }}
                 placeholder="Full Name"
+                onChange={this.handelUsername}
+                value={this.state.username}
               />
             </div>
             <div className="item body w-100 text-center">
@@ -53,13 +69,29 @@ class Option extends Component {
                   src={img}
                   className="SelectImage"
                   key={i}
-                  alt=""
+                  alt={img}
                   onClick={this.selectImage}
                 />
               ))}
             </div>
             <div className="item footer text-center w-100">
-              <button className="btn ">Add User</button>
+              <button
+                className="btn "
+                style={{ display: "inline" }}
+                disabled={
+                  this.state.username ? (this.state.img ? false : true) : true
+                }
+                onClick={() => this.props.anonymouslyLogin(this.state)}
+              >
+                Add User
+              </button>
+              <button
+                className="btn danger"
+                style={{ background: "red", display: "inline" }}
+                onClick={() => this.props.disabledModal()}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -68,4 +100,14 @@ class Option extends Component {
   }
 }
 
-export default Option;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    anonymouslyLogin: pram => {
+      dispatch(AnonymouslyLogin(pram));
+    }
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Option);
