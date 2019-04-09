@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+
 import Routing from "./routes";
 import store from "./store";
+
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all";
+import "animate.css/animate.css";
+
 import "./App.css";
+
 import Common from "./components/common";
 
 class App extends Component {

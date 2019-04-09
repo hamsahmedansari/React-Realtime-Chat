@@ -303,7 +303,7 @@ a {
 }
 
 #routing {
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.5s;
 }
 
 #routing > div.inActive {

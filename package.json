@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
+    "animate.css": "^3.7.0",
     "firebase": "^5.9.3",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",

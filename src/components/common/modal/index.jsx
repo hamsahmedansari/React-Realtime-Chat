@@ -17,8 +17,8 @@ class Modal extends Component {
   render() {
     const { status } = this.props;
     return (
-      <div className="modal">
-        <div className="flex-align-item-center flex-container flex-justify-center model">
+      <div className="modal animated fadeIn">
+        <div className="flex-align-item-center flex-container flex-justify-center model animated slideIn">
           <div
             className={`item flex-container flex-column flex-align-item-start flex-justify-space-between flex-wrap ${status}`}
           >

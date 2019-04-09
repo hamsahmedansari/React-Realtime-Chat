@@ -23,13 +23,19 @@ class Login extends Component {
     };
   }
   componentDidMount() {
-    // if (!this.props.auth.isLoaded) {
-    this.props.loadingCreate();
-    // } else {
-    setTimeout(() => {
+    if (!this.props.auth.isLoaded) {
+      this.props.loadingCreate();
+    } else {
       this.props.loadingRemove();
-    }, 1000);
-    // }
+    }
+    // if()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.auth.isLoaded) {
+      this.props.loadingCreate();
+    } else {
+      this.props.loadingRemove();
+    }
   }
   shuffle = array => {
     return array.sort(() => Math.random() - 0.5);
@@ -186,7 +192,8 @@ class Login extends Component {
 // export default Login;
 const mapStateToProps = (state, ownProps) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    status: state.auth.status
   };
 };
 
