@@ -8,7 +8,7 @@ class MessageBox extends Component {
     this.state = {};
   }
   render() {
-    const { active } = this.props;
+    const { active, status } = this.props;
     return (
       <div className={`messageBox flex-container ${active ? "active" : ""}`}>
         <div className="item">
@@ -16,7 +16,7 @@ class MessageBox extends Component {
         </div>
         <div className="item">
           <h4>Arqam Ahmed</h4>
-          <p>Lorem ipsum dolor sit amet consectetur...</p>
+          {!status && <p>Lorem ipsum dolor sit amet consectetur...</p>}
         </div>
         <div className="item">
           <p>Dec 12</p>

@@ -10,11 +10,14 @@ import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
 import Message from "../common/message";
 import IsTyping from "../common/isTyping";
+import NewMessage from "../common/newMessage";
+import People from "../common/people";
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMenu: false
+      isMenu: false,
+      visible: "newMessage"
     };
   }
 
@@ -37,8 +40,13 @@ class Home extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.isUnder850px);
   }
+
+  handleChangeNav = pram => {
+    this.setState({ visible: pram });
+  };
+
   render() {
-    const { isMenu } = this.state;
+    const { isMenu, visible } = this.state;
     const user = this.props.user !== null ? this.props.user : {};
 
     return (
@@ -69,16 +77,27 @@ class Home extends Component {
               </div>
               <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <div className="flex-container">
-                  <div className="item active">
+                  <div
+                    onClick={() => this.handleChangeNav("newMessage")}
+                    className={`item ${
+                      visible === "newMessage" ? "active" : ""
+                    }`}
+                  >
                     <p>New Message (2)</p>
                   </div>
-                  <div className="item">
+                  <div
+                    onClick={() => this.handleChangeNav("people")}
+                    className={`item ${visible === "people" ? "active" : ""}`}
+                  >
                     <p>Peoples (2)</p>
                   </div>
-                  <div className="item">
+                  <div
+                    onClick={() => this.handleChangeNav("online")}
+                    className={`item ${visible === "online" ? "active" : ""}`}
+                  >
                     <p>Online (2)</p>
                   </div>
-                  <div className="item">
+                  <div className={`item`}>
                     <p>
                       <Link to="/logout">Logout</Link>
                     </p>
@@ -101,83 +120,19 @@ class Home extends Component {
                 </div>
               </div>
               {/* Message's */}
-              <div className="item flex-container">
-                <div className="item">
-                  <MessageBox />
+              {visible === "newMessage" ? (
+                <div className="item flex-container">
+                  <NewMessage />
                 </div>
-                <div className="item">
-                  <MessageBox />
+              ) : visible === "people" ? (
+                <div className="item flex-container">
+                  <People />
                 </div>
-                <div className="item">
-                  <MessageBox />
+              ) : visible === "online" ? (
+                <div className="item flex-container">
+                  <People />
                 </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox active={true} />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-                <div className="item">
-                  <MessageBox />
-                </div>
-              </div>
+              ) : null}
             </div>
           </div>
           <div className="item">
