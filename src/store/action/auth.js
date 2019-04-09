@@ -1,4 +1,5 @@
 import action from "../constant/auth";
+import { Redirect } from "react-router-dom";
 
 const Login = (firebase, provider, dispatch) => {
   firebase
@@ -6,17 +7,32 @@ const Login = (firebase, provider, dispatch) => {
     .signInWithPopup(provider)
     .then(result => {
       dispatch({
-        type: action.AUTH_SUCCESS,
+        type: action.AUTH_LOGIN_SUCCESS,
         payload: null
       });
     })
     .catch(err => {
       dispatch({
-        type: action.AUTH_FAILED,
-        payload: false
+        type: action.AUTH_LOGIN_FAILED,
+        payload: err.message
       });
     });
 };
+
+export function SignOut() {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .signOut()
+      .then(data => {
+        console.log(data);
+
+        dispatch({ type: action.AUTH_LOGOUT_SUCCESS });
+      });
+  };
+}
 
 export function GoogleLogin() {
   return (dispatch, getState, { getFirebase }) => {
@@ -58,13 +74,13 @@ export function AnonymouslyLogin() {
       .signInAnonymously()
       .then(result => {
         dispatch({
-          type: action.AUTH_SUCCESS,
+          type: action.AUTH_LOGIN_SUCCESS,
           payload: null
         });
       })
       .catch(err => {
         dispatch({
-          type: action.AUTH_FAILED,
+          type: action.AUTH_LOGOUT_SUCCESS,
           payload: false
         });
       });

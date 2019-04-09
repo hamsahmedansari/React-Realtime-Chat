@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
   GoogleLogin,
   AnonymouslyLogin,
@@ -54,6 +55,13 @@ class Login extends Component {
       "color-6",
       "color-7"
     ];
+
+    const { auth } = this.props;
+
+    if (auth.uid) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="login">
         <div className="flex-container">
@@ -169,7 +177,7 @@ class Login extends Component {
 // export default Login;
 const mapStateToProps = (state, ownProps) => {
   return {
-    auth: state.auth
+    auth: state.firebase.auth
   };
 };
 
