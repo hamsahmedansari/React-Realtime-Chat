@@ -178,25 +178,3 @@ export function AnonymouslyLogin(pram) {
       });
   };
 }
-
-export function getUser() {
-  return (dispatch, getState, { getFirestore }) => {
-    const firestore = getFirestore();
-
-    const { uid } = getState().firebase.auth;
-
-    firestore
-      .collection("users")
-      .doc(uid)
-      .get()
-      .then(res => {
-        dispatch({
-          type: actionAuth.AUTH_LOGIN_SUCCESS,
-          payload: {
-            fullname: res.data().fullname,
-            image: res.data().image
-          }
-        });
-      });
-  };
-}

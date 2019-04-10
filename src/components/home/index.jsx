@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser } from "../../store/action/auth";
 
 import "./style.scss";
 
 import Profile from "../common/profile";
-import MessageBox from "../common/messageBox";
 import HandWriting from "../common/handWriting";
 import Message from "../common/message";
 import IsTyping from "../common/isTyping";
 import NewMessage from "../common/newMessage";
 import People from "../common/people";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,6 @@ class Home extends Component {
   };
   componentDidMount() {
     window.addEventListener("resize", this.isUnder850px);
-    this.props.getUser();
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.isUnder850px);
@@ -47,8 +46,8 @@ class Home extends Component {
 
   render() {
     const { isMenu, visible } = this.state;
-    const user = this.props.user !== null ? this.props.user : {};
-
+    const userObj = this.props.user ? this.props.user : null;
+    const user = userObj ? userObj[Object.keys(userObj)[0]] : {};
     return (
       <div className="home">
         <div className="flex-container">
@@ -191,17 +190,17 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.auth.user
+    uid: state.firebase.auth.uid,
+    user: state.firestore.data.users
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getUser: () => {
-      dispatch(getUser());
-    }
-  };
+  return {};
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  firestoreConnect(props => [{ collection: "users", doc: props.uid }])
 )(Home);
