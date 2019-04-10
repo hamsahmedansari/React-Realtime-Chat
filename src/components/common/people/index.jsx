@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 import MessageBox from "../messageBox";
 
@@ -26,11 +28,14 @@ const People = props => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.users.list
+    users: state.firestore.ordered.users
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
+export default compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  firestoreConnect([{ collection: "users" }])
 )(People);
