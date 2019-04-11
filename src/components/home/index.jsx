@@ -19,7 +19,8 @@ class Home extends Component {
     super(props);
     this.state = {
       isMenu: false,
-      visible: "newMessage"
+      visible: "newMessage",
+      search: ""
     };
   }
 
@@ -46,8 +47,16 @@ class Home extends Component {
     this.setState({ visible: pram });
   };
 
+  handelSearchChange = ({ currentTarget }) => {
+    this.setState(perState => ({
+      ...perState,
+      visible: "people",
+      search: currentTarget.value
+    }));
+  };
+
   render() {
-    const { isMenu, visible } = this.state;
+    const { isMenu, visible, search } = this.state;
     const userObj = this.props.user ? this.props.user : null;
     const user = userObj ? userObj[Object.keys(userObj)[0]] : {};
     return (
@@ -121,6 +130,8 @@ class Home extends Component {
                     type="text "
                     className="item"
                     placeholder="Search Here"
+                    onChange={this.handelSearchChange}
+                    value={search}
                   />
                 </div>
               </div>
@@ -131,7 +142,7 @@ class Home extends Component {
                 </div>
               ) : visible === "people" ? (
                 <div className="item flex-container">
-                  <People />
+                  <People search={search} />
                 </div>
               ) : visible === "online" ? (
                 <div className="item flex-container">

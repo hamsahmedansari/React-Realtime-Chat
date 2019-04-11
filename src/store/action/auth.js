@@ -81,6 +81,23 @@ export function SignOut() {
             dispatch({ type: actionAuth.AUTH_LOGOUT_SUCCESS });
             dispatch({ type: actionLoading.LOADING_REMOVE });
           });
+      })
+      .catch(err => {
+        dispatch({
+          type: actionAuth.AUTH_LOGIN_FAILED,
+          payload: err.message
+        });
+        dispatch({
+          type: actionLoading.LOADING_CREATE,
+          payload: {
+            status: "danger",
+            head: "Error In Signing Out",
+            body: err.message
+          }
+        });
+        setTimeout(() => {
+          dispatch({ type: actionLoading.LOADING_REMOVE });
+        }, 3000);
       });
   };
 }

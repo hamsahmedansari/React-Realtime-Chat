@@ -8,8 +8,19 @@ import GetDate from "../../../common/getDate";
 
 const People = props => {
   if (!props.users) return false;
-  const { users } = props;
-  const sortUsers = users.sort((a, b) => (a.isLogin ? -1 : 1));
+  const { users, search } = props;
+  let sortUsers = [];
+  let tempUsers = users;
+  if (search) {
+    tempUsers = users.filter(user =>
+      String(user.fullname)
+        .toLowerCase()
+        .indexOf(String(search).toLowerCase()) !== -1
+        ? user
+        : false
+    );
+  }
+  sortUsers = tempUsers.sort((a, b) => (a.isLogin ? -1 : 1));
   return (
     <React.Fragment>
       {sortUsers.map((user, i) => {
