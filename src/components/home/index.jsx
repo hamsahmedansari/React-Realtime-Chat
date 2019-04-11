@@ -13,6 +13,7 @@ import IsTyping from "../common/isTyping";
 import NewMessage from "../common/newMessage";
 import People from "../common/people";
 import Online from "../common/online";
+import GetAllUsers from "../../common/getUsers";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -89,13 +90,17 @@ class Home extends Component {
                     onClick={() => this.handleChangeNav("people")}
                     className={`item ${visible === "people" ? "active" : ""}`}
                   >
-                    <p>Peoples (2)</p>
+                    <p>
+                      Peoples (<GetAllUsers type="all" />)
+                    </p>
                   </div>
                   <div
                     onClick={() => this.handleChangeNav("online")}
                     className={`item ${visible === "online" ? "active" : ""}`}
                   >
-                    <p>Online (2)</p>
+                    <p>
+                      Online (<GetAllUsers type="online" />)
+                    </p>
                   </div>
                   <div className={`item`}>
                     <p>

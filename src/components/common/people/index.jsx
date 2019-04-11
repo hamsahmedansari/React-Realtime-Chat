@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 import MessageBox from "../messageBox";
-import GetDate from "../date";
+import GetDate from "../../../common/getDate";
 
 const People = props => {
   if (!props.users) return false;
