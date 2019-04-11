@@ -3,8 +3,7 @@ import Profile from "../profile";
 import Message from "../message";
 import IsTyping from "../isTyping";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import { CreateChatRoom } from "../../../store/action/chat";
 
 const ChatPanel = props => {
   console.log(props);
@@ -42,6 +41,12 @@ const ChatPanel = props => {
         </div>
       </div>
     );
+
+  const handelCreateChatRoom = () => {
+    const { userID, uid, createChatRoom } = props;
+    createChatRoom(uid, userID);
+  };
+
   return (
     <div className="item">
       <div className="flex-container">
@@ -89,7 +94,9 @@ const ChatPanel = props => {
               <textarea placeholder="Enter Message" />
             </div>
             <div className="item">
-              <button className="btn ">Send</button>
+              <button className="btn" onClick={handelCreateChatRoom}>
+                Send
+              </button>
             </div>
           </div>
         </div>
@@ -99,10 +106,19 @@ const ChatPanel = props => {
 };
 const mapStateToProps = (state, ownProps) => {
   return {
+    uid: state.firebase.auth.uid,
     user: ownProps.userID ? state.firestore.data.users[ownProps.userID] : {}
   };
 };
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    createChatRoom: (ownUid, secondUid) => {
+      dispatch(CreateChatRoom(ownUid, secondUid));
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ChatPanel);
