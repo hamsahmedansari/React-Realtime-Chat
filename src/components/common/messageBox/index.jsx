@@ -16,7 +16,7 @@ class MessageBox extends Component {
   };
   render() {
     const { user, status, selectedUser } = this.props;
-    const { fullname, image, message, date, online: isLogin, uid } = user;
+    const { fullname, image, message, date, isLogin, uid } = user;
     const active = selectedUser.uid === uid ? true : false;
     return (
       <div

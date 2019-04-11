@@ -11,7 +11,7 @@ const People = props => {
   const { users, search } = props;
   let sortUsers = [];
   let tempUsers = users;
-  if (search) {
+  if (search.length > 0) {
     tempUsers = users.filter(user =>
       String(user.fullname)
         .toLowerCase()
@@ -20,7 +20,13 @@ const People = props => {
         : false
     );
   }
-  sortUsers = tempUsers.sort((a, b) => (a.isLogin ? -1 : 1));
+  try {
+    sortUsers = tempUsers.sort((a, b) => (a.isLogin ? -1 : 1));
+  } catch (error) {
+    console.log(error);
+    sortUsers = users;
+  }
+
   return (
     <React.Fragment>
       {sortUsers.map((user, i) => {
