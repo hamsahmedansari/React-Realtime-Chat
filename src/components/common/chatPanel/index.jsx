@@ -2,10 +2,14 @@ import React from "react";
 import Profile from "../profile";
 import Message from "../message";
 import IsTyping from "../isTyping";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 const ChatPanel = props => {
-  const { userID } = props;
   console.log(props);
+
+  const { userID, user } = props;
   if (!userID)
     return (
       <div className="item">
@@ -43,7 +47,11 @@ const ChatPanel = props => {
       <div className="flex-container">
         {/* Header */}
         <div className="item">
-          {/* <Profile username={user.fullname} image={user.image} /> */}
+          <Profile
+            username={user.fullname}
+            image={user.image}
+            isOnline={user.isLogin}
+          />
         </div>
         {/* Chat */}
         <div className="item">
@@ -89,5 +97,12 @@ const ChatPanel = props => {
     </div>
   );
 };
-
-export default ChatPanel;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: ownProps.userID ? state.firestore.data.users[ownProps.userID] : {}
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(ChatPanel);

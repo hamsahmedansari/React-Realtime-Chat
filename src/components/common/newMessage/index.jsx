@@ -8,7 +8,7 @@ const NewMessage = () => {
         <MessageBox />
       </div>
       <div className="item">
-        <MessageBox active={true} />
+        <MessageBox />
       </div>
     </React.Fragment>
   );

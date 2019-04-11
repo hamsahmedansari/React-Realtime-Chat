@@ -77,6 +77,7 @@ class Home extends Component {
               {/* Profile */}
               <div className={`item ${isMenu ? "d-none" : ""}`}>
                 <Profile
+                  isOnline={true}
                   shortName={true}
                   style={{ padding: "10px" }}
                   username={user.fullname}

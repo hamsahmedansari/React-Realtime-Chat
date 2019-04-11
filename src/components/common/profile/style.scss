@@ -33,5 +33,13 @@
   p {
     font-size: 12px;
     color: #8bc34a;
+    &.offline {
+      color: #f44336;
+      svg {
+        path {
+          color: #f44336;
+        }
+      }
+    }
   }
 }
