@@ -11,6 +11,9 @@ const Online = props => {
   return (
     <React.Fragment>
       {props.users.map((user, i) => {
+        if (user.uid === props.currentUserUid) {
+          return false;
+        }
         let date = "";
         if (!user.isLogin) {
           return false;
@@ -35,7 +38,8 @@ const Online = props => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    currentUserUid: state.firebase.auth.uid
   };
 };
 

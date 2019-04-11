@@ -8,9 +8,14 @@ import GetDate from "../date";
 
 const People = props => {
   if (!props.users) return false;
+  const { users } = props;
+  const sortUsers = users.sort((a, b) => (a.isLogin ? -1 : 1));
   return (
     <React.Fragment>
-      {props.users.map((user, i) => {
+      {sortUsers.map((user, i) => {
+        if (user.uid === props.currentUserUid) {
+          return false;
+        }
         let date = "";
         if (!user.isLogin) {
           date = GetDate(user.lastLogin);
@@ -35,7 +40,8 @@ const People = props => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    currentUserUid: state.firebase.auth.uid
   };
 };
 
