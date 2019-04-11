@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import "./style.scss";
 import { ChangeSelectedUser } from "../../../store/action/chat";
+import GetDate from "../../../common/getDate";
 
 class MessageBox extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class MessageBox extends Component {
   };
   render() {
     const { user, status, selectedUser } = this.props;
-    const { fullname, image, message, date, isLogin, uid } = user;
+    const { fullname, image, message, lastLogin, isLogin, uid } = user;
     const active = selectedUser.uid === uid ? true : false;
     return (
       <div
@@ -39,7 +40,7 @@ class MessageBox extends Component {
           )}
         </div>
         <div className="item">
-          <p>{date}</p>
+          <p>{isLogin ? null : GetDate(lastLogin)}</p>
           <p className={isLogin ? "online" : ""}>
             <i className="fas fa-dot-circle" />
           </p>
