@@ -6,14 +6,14 @@ import { firestoreConnect } from "react-redux-firebase";
 import MessageBox from "../messageBox";
 import GetDate from "../date";
 
-const People = props => {
+const Online = props => {
   if (!props.users) return false;
   return (
     <React.Fragment>
       {props.users.map((user, i) => {
         let date = "";
         if (!user.isLogin) {
-          date = GetDate(user.lastLogin);
+          return false;
         }
         return (
           <div className="item" key={i}>
@@ -45,4 +45,4 @@ export default compose(
     null
   ),
   firestoreConnect([{ collection: "users" }])
-)(People);
+)(Online);

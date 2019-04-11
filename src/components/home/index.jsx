@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 import "./style.scss";
 
@@ -10,8 +12,7 @@ import Message from "../common/message";
 import IsTyping from "../common/isTyping";
 import NewMessage from "../common/newMessage";
 import People from "../common/people";
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
+import Online from "../common/online";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -129,7 +130,7 @@ class Home extends Component {
                 </div>
               ) : visible === "online" ? (
                 <div className="item flex-container">
-                  <People />
+                  <Online />
                 </div>
               ) : null}
             </div>

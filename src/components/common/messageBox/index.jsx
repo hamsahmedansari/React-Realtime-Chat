@@ -27,7 +27,7 @@ class MessageBox extends Component {
           )}
         </div>
         <div className="item">
-          <p>date</p>
+          <p>{date}</p>
           <p className={online ? "online" : ""}>
             <i className="fas fa-dot-circle" />
           </p>
