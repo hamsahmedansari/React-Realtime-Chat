@@ -1,21 +1,33 @@
 import React, { Component } from "react";
-import "./style.scss";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import "./style.scss";
+import { ChangeSelectedUser } from "../../../store/action/chat";
 
 class MessageBox extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  handelChangeChat = () => {
+    const { user, changeSelectedUser } = this.props;
+    changeSelectedUser(user.uid);
+  };
   render() {
-    const { active, status, name, image, message, date, online } = this.props;
+    const { user, status, selectedUser } = this.props;
+    const { fullname, image, message, date, online: isLogin, uid } = user;
+    const active = selectedUser.uid === uid ? true : false;
     return (
-      <div className={`messageBox flex-container ${active ? "active" : ""}`}>
+      <div
+        className={`messageBox flex-container ${active ? "active" : ""}`}
+        onClick={this.handelChangeChat}
+      >
         <div className="item">
           <img src={image} alt="" />
         </div>
         <div className="item">
-          <h4>{name}</h4>
+          <h4>{fullname}</h4>
           {!status && (
             <p>
               {String(message).length >= 40
@@ -28,7 +40,7 @@ class MessageBox extends Component {
         </div>
         <div className="item">
           <p>{date}</p>
-          <p className={online ? "online" : ""}>
+          <p className={isLogin ? "online" : ""}>
             <i className="fas fa-dot-circle" />
           </p>
         </div>
@@ -40,5 +52,19 @@ class MessageBox extends Component {
 MessageBox.propTypes = {
   active: PropTypes.bool
 };
-
-export default MessageBox;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeSelectedUser: uid => {
+      dispatch(ChangeSelectedUser(uid));
+    }
+  };
+};
+const mapStateToProps = (state, ownProps) => {
+  return {
+    selectedUser: state.chat
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MessageBox);

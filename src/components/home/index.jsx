@@ -8,12 +8,12 @@ import "./style.scss";
 
 import Profile from "../common/profile";
 import HandWriting from "../common/handWriting";
-import Message from "../common/message";
-import IsTyping from "../common/isTyping";
 import NewMessage from "../common/newMessage";
 import People from "../common/people";
 import Online from "../common/online";
 import GetAllUsers from "../../common/getUsers";
+import ChatPanel from "../common/chatPanel";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +57,7 @@ class Home extends Component {
 
   render() {
     const { isMenu, visible, search } = this.state;
+    const { selectedUser } = this.props;
     const userObj = this.props.user ? this.props.user : null;
     const user = userObj ? userObj[Object.keys(userObj)[0]] : {};
     return (
@@ -138,7 +139,7 @@ class Home extends Component {
               {/* Message's */}
               {visible === "newMessage" ? (
                 <div className="item flex-container">
-                  <NewMessage />
+                  {/* <NewMessage /> */}
                 </div>
               ) : visible === "people" ? (
                 <div className="item flex-container">
@@ -151,54 +152,8 @@ class Home extends Component {
               ) : null}
             </div>
           </div>
-          <div className="item">
-            <div className="flex-container">
-              {/* Header */}
-              <div className="item">
-                <Profile username={user.fullname} image={user.image} />
-              </div>
-              {/* Chat */}
-              <div className="item">
-                <div className="flex-container">
-                  <div className="item">
-                    <Message />
-                  </div>
-                  <div className="item">
-                    <Message sibling={true} />
-                  </div>
-                  <div className="item">
-                    <Message mine={true} />
-                  </div>
-                  <div className="item">
-                    <Message sibling={true} mine={true} />
-                  </div>
-                  <div className="item">
-                    <Message />
-                  </div>
-                  <div className="item">
-                    <Message mine={true} />
-                  </div>
-                  <div className="item">
-                    <IsTyping />
-                  </div>
-                </div>
-              </div>
-              {/* Action */}
-              <div className="item">
-                <div className="flex-container">
-                  <div className="item">
-                    <div className="fas fa-camera" />
-                  </div>
-                  <div className="item">
-                    <textarea placeholder="Enter Message" />
-                  </div>
-                  <div className="item">
-                    <button className="btn ">Send</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Chat Panel */}
+          <ChatPanel userID={selectedUser.uid} />
         </div>
       </div>
     );
@@ -208,7 +163,8 @@ class Home extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     uid: state.firebase.auth.uid,
-    user: state.firestore.data.users
+    user: state.firestore.data.users,
+    selectedUser: state.chat
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {

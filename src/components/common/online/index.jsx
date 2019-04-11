@@ -19,13 +19,7 @@ const Online = props => {
         }
         return (
           <div className="item" key={i}>
-            <MessageBox
-              status={true}
-              name={user.fullname}
-              image={user.image}
-              date={date}
-              online={user.isLogin}
-            />
+            <MessageBox status={true} user={user} />
           </div>
         );
       })}
