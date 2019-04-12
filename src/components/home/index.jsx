@@ -140,7 +140,7 @@ class Home extends Component {
               {/* Message's */}
               {visible === "newMessage" ? (
                 <div className="item flex-container">
-                  {/* <NewMessage /> */}
+                  <NewMessage />
                 </div>
               ) : visible === "people" ? (
                 <div className="item flex-container">

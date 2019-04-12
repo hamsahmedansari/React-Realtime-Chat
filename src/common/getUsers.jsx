@@ -11,7 +11,8 @@ const GetAllUsers = props => {
   }
 
   if (type === "online") {
-    return users.filter(user => user.isLogin).length - 1;
+    let tempUser = users.filter(user => user.isLogin).length;
+    return tempUser > 0 ? tempUser - 1 : 0;
   }
 };
 

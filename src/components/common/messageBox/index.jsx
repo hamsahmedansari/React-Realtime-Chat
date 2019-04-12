@@ -17,8 +17,9 @@ class MessageBox extends Component {
   };
   render() {
     const { user, status, selectedUser } = this.props;
-    const { fullname, image, message, lastLogin, isLogin, uid } = user;
+    const { fullname, image, lastLogin, isLogin, uid } = user;
     const active = selectedUser.uid === uid ? true : false;
+    const message = "i am dummy message";
     return (
       <div
         className={`messageBox flex-container ${active ? "active" : ""}`}

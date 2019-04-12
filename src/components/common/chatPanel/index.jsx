@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import { CreateChatRoom } from "../../../store/action/chat";
 
 const ChatPanel = props => {
-  console.log(props);
-
   const { userID, user } = props;
   if (!userID)
     return (

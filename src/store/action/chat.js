@@ -1,11 +1,14 @@
 import action from "../constant/chat";
-
+// Users
 export function ChangeSelectedUser(uid) {
   return (dispatch, getState) => {
     dispatch({ type: action.CHANGE_SELECTED_USER, payload: { uid } });
   };
 }
 
+// Rooms
+// Get
+// Create & isExist
 export function CreateChatRoom(ownUid, secondUid) {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
