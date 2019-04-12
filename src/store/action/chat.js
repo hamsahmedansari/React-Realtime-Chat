@@ -36,7 +36,14 @@ export function CreateChatRoom(firestore, ownUid, secondUid) {
       return CreateChatRoomInChatRoom(firestore, ownUid, secondUid).then(
         res => {
           return CreateRoomInUser(firestore, ownUid, secondUid, res.id).then(
-            response => res.id
+            response => {
+              return CreateRoomInUser(
+                firestore,
+                secondUid,
+                ownUid,
+                res.id
+              ).then(r => res.id);
+            }
           );
         }
       );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import GetDate from "../../../common/getDate";
 
 const Message = props => {
   // return (  );
@@ -29,13 +30,11 @@ const Message = props => {
         </p>
         <p>
           <span>
-            <strong>Delivered at</strong> &nbsp;
+            <strong>{isSeen ? "Seen at" : "Delivered at"}</strong> &nbsp;
           </span>
-          14 min ago
+          {GetDate(createAt)} ago
         </p>
-        <p>
-          <strong>Message Not Send</strong>
-        </p>
+        <p>{/* <strong>Message Not Send</strong> */}</p>
       </div>
     </div>
   );
