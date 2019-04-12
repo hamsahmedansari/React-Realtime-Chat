@@ -6,22 +6,35 @@ import { firestoreConnect } from "react-redux-firebase";
 import Profile from "../profile";
 import Message from "../message";
 import IsTyping from "../isTyping";
-import { CreateChatRoom } from "../../../store/action/chat";
+import { CreateChatRoom, CreateMessage } from "../../../store/action/chat";
 
 class ChatPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chats: []
+      chats: [],
+      message: ""
     };
     this._fireStoreChatRooms = null;
   }
 
   handelCreateChatRoom = () => {
-    const { userID, uid, createChatRoom, chat } = this.props;
-    createChatRoom(uid, userID);
+    const { userID, uid, chat, createMessage, firestore } = this.props;
+    const { message } = this.state;
+    if (message.length > 0) {
+      let roomId = chat.roomId;
+      if (!roomId) {
+        CreateChatRoom(firestore, uid, userID).then(id => (roomId = id));
+      }
+      createMessage(roomId, uid, message);
+      this.setState({
+        message: ""
+      });
+    }
   };
-
+  handelChangeMessage = ({ currentTarget }) => {
+    this.setState(per => ({ ...per, message: currentTarget.value }));
+  };
   componentDidUpdate(prevProps, prevState) {
     const { userID: newuserID, chat } = this.props;
     const { userID: olduserID } = prevProps;
@@ -54,29 +67,35 @@ class ChatPanel extends React.Component {
       .collection("messages")
       .onSnapshot(data => {
         if (!data.empty) {
-          console.log(data);
+          const tempArrayOfMessage = [];
+          data.forEach(function(doc) {
+            if (doc && doc.exists) {
+              const message = doc.data();
+              // const { id } = doc;
+              // DO SOMETHING
+              tempArrayOfMessage.push(message);
+            }
+          });
+          this.setState(per => ({ ...per, chats: tempArrayOfMessage }));
         }
-        // const tempArrayOfChat = [];
-        //   data.forEach(function(doc) {
-        //     if (doc && doc.exists) {
-        //       const { roomUid } = doc.data();
-        //       const { id } = doc;
-        //       // DO SOMETHING
-        //       tempArrayOfChat.push({
-        //         roomUid,
-        //         userUid: id
-        //       });
-        //     }
-        //   });
-        //   this.setState({
-        //     chatRooms: tempArrayOfChat
-        //   });
       });
   };
 
   render() {
     const { userID, user } = this.props;
-    const { chats } = this.state;
+    const { chats, message } = this.state;
+    console.log(chats);
+
+    const orderedChats = chats.sort((a, b) => {
+      let date1 = new Date();
+      date1.setTime(a.createAt);
+      let date2 = new Date();
+      date2.setTime(b.createAt);
+      // console.log(date1, date2);
+      return date1 - date2;
+      // if (a > b) return -1;
+      // else return 1;
+    });
     if (!userID)
       return (
         <div className="item">
@@ -99,10 +118,12 @@ class ChatPanel extends React.Component {
                   <div className="fas fa-camera" />
                 </div>
                 <div className="item">
-                  <textarea placeholder="Enter Message" />
+                  <textarea placeholder="Enter Message" disabled />
                 </div>
                 <div className="item">
-                  <button className="btn ">Send</button>
+                  <button className="btn" disabled>
+                    Send
+                  </button>
                 </div>
               </div>
             </div>
@@ -124,9 +145,9 @@ class ChatPanel extends React.Component {
           {/* Chat */}
           <div className="item">
             <div className="flex-container">
-              {chats.map((chat, i) => (
+              {orderedChats.map((chat, i) => (
                 <div className="item" key={i}>
-                  <Message />
+                  <Message chat={chat} />
                 </div>
               ))}
               {/* <div className="item">
@@ -156,7 +177,11 @@ class ChatPanel extends React.Component {
                 <div className="fas fa-camera" />
               </div>
               <div className="item">
-                <textarea placeholder="Enter Message" />
+                <textarea
+                  placeholder="Enter Message"
+                  onChange={this.handelChangeMessage}
+                  value={message}
+                />
               </div>
               <div className="item">
                 <button className="btn" onClick={this.handelCreateChatRoom}>
@@ -179,8 +204,11 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    createChatRoom: (ownUid, secondUid) => {
-      dispatch(CreateChatRoom(ownUid, secondUid));
+    // createChatRoom: (ownUid, secondUid) => {
+    //   dispatch(CreateChatRoom(ownUid, secondUid));
+    // },
+    createMessage: (roomId, ownUid, message) => {
+      dispatch(CreateMessage(roomId, ownUid, message));
     }
   };
 };

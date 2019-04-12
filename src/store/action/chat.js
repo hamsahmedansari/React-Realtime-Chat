@@ -6,25 +6,43 @@ export function ChangeSelectedUser(uid, roomId) {
   };
 }
 
+// Message
+// Create
+export function CreateMessage(roomId, ownUid, message) {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    firestore
+      .collection("chatRooms")
+      .doc(roomId)
+      .collection("messages")
+      .add({
+        createdBy: ownUid,
+        createAt: new Date().getTime(),
+        isSeen: false,
+        message: String(message).trim()
+      });
+  };
+}
+
 // Rooms
 // Get
 // Create & isExist
-export function CreateChatRoom(ownUid, secondUid) {
-  return (dispatch, getState, { getFirestore }) => {
-    const firestore = getFirestore();
-    IsRoomExistInUser(firestore, ownUid, secondUid).then(data => {
-      if (!data.exists) {
-        // checkRoom in chatRoom
-        CreateChatRoomInChatRoom(firestore, ownUid, secondUid).then(res => {
-          CreateRoomInUser(firestore, ownUid, secondUid, res.id).then(
-            response => {
-              console.log(response);
-            }
+export function CreateChatRoom(firestore, ownUid, secondUid) {
+  // return (dispatch, getState, { getFirestore }) => {
+  // const firestore = getFirestore();
+  return IsRoomExistInUser(firestore, ownUid, secondUid).then(data => {
+    if (!data.exists) {
+      // checkRoom in chatRoom
+      return CreateChatRoomInChatRoom(firestore, ownUid, secondUid).then(
+        res => {
+          return CreateRoomInUser(firestore, ownUid, secondUid, res.id).then(
+            response => res.id
           );
-        });
-      }
-    });
-  };
+        }
+      );
+    }
+  });
+  // };
 }
 
 // function IsRoomExistInChatRoom(firestore, uid) {
