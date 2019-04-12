@@ -12,8 +12,8 @@ class MessageBox extends Component {
     this.state = {};
   }
   handelChangeChat = () => {
-    const { user, changeSelectedUser } = this.props;
-    changeSelectedUser(user.uid);
+    const { user, changeSelectedUser, roomId } = this.props;
+    changeSelectedUser(user.uid, roomId);
   };
   render() {
     const { user, status, selectedUser } = this.props;
@@ -56,8 +56,8 @@ MessageBox.propTypes = {
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changeSelectedUser: uid => {
-      dispatch(ChangeSelectedUser(uid));
+    changeSelectedUser: (uid, roomId) => {
+      dispatch(ChangeSelectedUser(uid, roomId));
     }
   };
 };

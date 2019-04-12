@@ -1,8 +1,8 @@
 import action from "../constant/chat";
 // Users
-export function ChangeSelectedUser(uid) {
+export function ChangeSelectedUser(uid, roomId) {
   return (dispatch, getState) => {
-    dispatch({ type: action.CHANGE_SELECTED_USER, payload: { uid } });
+    dispatch({ type: action.CHANGE_SELECTED_USER, payload: { uid, roomId } });
   };
 }
 
