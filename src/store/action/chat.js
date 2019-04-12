@@ -15,7 +15,7 @@ export function CreateChatRoom(ownUid, secondUid) {
     IsRoomExistInUser(firestore, ownUid, secondUid).then(data => {
       if (!data.exists) {
         // checkRoom in chatRoom
-        CreateChatRoomInChatRoom(firestore).then(res => {
+        CreateChatRoomInChatRoom(firestore, ownUid, secondUid).then(res => {
           CreateRoomInUser(firestore, ownUid, secondUid, res.id).then(
             response => {
               console.log(response);
@@ -34,9 +34,11 @@ export function CreateChatRoom(ownUid, secondUid) {
 //     .get();
 // }
 
-function CreateChatRoomInChatRoom(firestore) {
+function CreateChatRoomInChatRoom(firestore, ownUid, secondUid) {
   return firestore.collection("chatRooms").add({
-    createAt: "i dont know"
+    createAt: new Date().getTime(),
+    firstUser: ownUid,
+    secondUser: secondUid
   });
 }
 
