@@ -73,7 +73,10 @@ class ChatPanel extends React.Component {
               const message = doc.data();
               // const { id } = doc;
               // DO SOMETHING
-              tempArrayOfMessage.push(message);
+              tempArrayOfMessage.push({
+                message,
+                uid: doc.id
+              });
             }
           });
           this.setState(per => ({ ...per, chats: tempArrayOfMessage }));
@@ -84,13 +87,12 @@ class ChatPanel extends React.Component {
   render() {
     const { userID, user } = this.props;
     const { chats, message } = this.state;
-    console.log(chats);
 
     const orderedChats = chats.sort((a, b) => {
       let date1 = new Date();
-      date1.setTime(a.createAt);
+      date1.setTime(a.message.createAt);
       let date2 = new Date();
-      date2.setTime(b.createAt);
+      date2.setTime(b.message.createAt);
       // console.log(date1, date2);
       return date1 - date2;
       // if (a > b) return -1;
@@ -147,7 +149,7 @@ class ChatPanel extends React.Component {
             <div className="flex-container">
               {orderedChats.map((chat, i) => (
                 <div className="item" key={i}>
-                  <Message chat={chat} />
+                  <Message chat={chat.message} chatId={chat.uid} />
                 </div>
               ))}
               {/* <div className="item">

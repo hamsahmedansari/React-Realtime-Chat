@@ -3,16 +3,36 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import GetDate from "../../../common/getDate";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 const Message = props => {
   // return (  );
-  const { sibling, chat, users, uid } = props;
+  const { sibling, chat, users, uid, firestore, roomId, chatId } = props;
   // console.log(props);
 
   if (!chat) return false;
+
   const { createdBy, createAt, isSeen, message } = chat;
   const currentUsers = users ? users.find(a => a.uid === createdBy) : null;
   const mine = currentUsers.uid === uid ? true : false;
+
+  if (!mine) {
+    if (!isSeen) {
+      firestore
+        .collection("chatRooms")
+        .doc(roomId)
+        .collection("messages")
+        .doc(chatId)
+        .set(
+          {
+            isSeen: true
+          },
+          { merge: true }
+        );
+    }
+  }
+
   return (
     // secondMessage
     <div
@@ -20,7 +40,7 @@ const Message = props => {
         mine ? "mine" : ""
       }`}
     >
-      {!mine && <img src="/assets/images/2.jpeg" alt="" className="item" />}
+      {!mine && <img src={currentUsers.image} alt="" className="item" />}
       <div className="item message-body">
         <p>
           {String(message)
@@ -30,7 +50,8 @@ const Message = props => {
         </p>
         <p>
           <span>
-            <strong>{isSeen ? "Seen at" : "Delivered at"}</strong> &nbsp;
+            {mine && <strong>{isSeen ? "Seen at" : "Delivered at"}</strong>}{" "}
+            &nbsp;
           </span>
           {GetDate(createAt)} ago
         </p>
@@ -48,11 +69,15 @@ Message.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     uid: state.firebase.auth.uid,
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    roomId: state.chat.roomId
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
+export default compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  firestoreConnect()
 )(Message);
