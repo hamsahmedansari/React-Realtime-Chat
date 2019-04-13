@@ -14,7 +14,8 @@ class ChatPanel extends React.Component {
     this.state = {
       chats: [],
       chatsRooms: [],
-      message: ""
+      message: "",
+      isLoading: false
     };
     this._fireStoreChatRooms = null;
     this._fireStoreAllChatRooms = null;
@@ -70,9 +71,9 @@ class ChatPanel extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { userID: newuserID, chat } = this.props;
+    const { userID: newuserID } = this.props;
     const { userID: olduserID } = prevProps;
-    const { chatsRooms, chats } = this.state;
+    const { chatsRooms, chats, isLoading } = this.state;
     if (newuserID) {
       const room = chatsRooms.find(chat => chat.withUserId === newuserID);
       if (room) {
@@ -96,7 +97,6 @@ class ChatPanel extends React.Component {
             console.log("getting data");
             this._fireStoreChatRooms = this.getDataFromFirestore(room.roomUid);
           }
-
           console.log("room change just got update.!");
         }
       } else {
@@ -112,6 +112,8 @@ class ChatPanel extends React.Component {
 
   getDataFromFirestore = uid => {
     const { firestore } = this.props;
+    const { isLoading } = this.state;
+    if (!isLoading) this.setState(per => ({ ...per, isLoading: true }));
     return firestore
       .collection("chatRooms")
       .doc(uid)
@@ -130,31 +132,20 @@ class ChatPanel extends React.Component {
               });
             }
           });
-          this.setState(per => ({ ...per, chats: tempArrayOfMessage }));
+          this.setState(per => ({
+            ...per,
+            chats: tempArrayOfMessage,
+            isLoading: false
+          }));
         }
       });
   };
 
   render() {
     const { userID, user } = this.props;
-    const { chats, message, chatsRooms } = this.state;
+    const { chats, message, chatsRooms, isLoading } = this.state;
 
-    const orderedChats = chats.sort((a, b) => {
-      let date1 = new Date();
-      date1.setTime(a.message.createAt);
-      let date2 = new Date();
-      date2.setTime(b.message.createAt);
-      // console.log(date1, date2);
-      return date1 - date2;
-      // if (a > b) return -1;
-      // else return 1;
-    });
-
-    // getRoomId
-    const room = chatsRooms.find(chat => chat.withUserId === userID);
-    let roomId = room ? room.roomUid : null;
-
-    if (!userID)
+    if (isLoading || !userID)
       return (
         <div className="item">
           <div className="flex-container">
@@ -165,7 +156,7 @@ class ChatPanel extends React.Component {
               <div className="flex-container">
                 <div className="item">
                   {/* <Message /> */}
-                  No Chat Selected
+                  {isLoading ? "Loading..." : !userID ? "No User Selected" : ""}
                 </div>
               </div>
             </div>
@@ -188,6 +179,21 @@ class ChatPanel extends React.Component {
           </div>
         </div>
       );
+
+    const orderedChats = chats.sort((a, b) => {
+      let date1 = new Date();
+      date1.setTime(a.message.createAt);
+      let date2 = new Date();
+      date2.setTime(b.message.createAt);
+      // console.log(date1, date2);
+      return date1 - date2;
+      // if (a > b) return -1;
+      // else return 1;
+    });
+
+    // getRoomId
+    const room = chatsRooms.find(chat => chat.withUserId === userID);
+    let roomId = room ? room.roomUid : null;
 
     return (
       <div className="item">
