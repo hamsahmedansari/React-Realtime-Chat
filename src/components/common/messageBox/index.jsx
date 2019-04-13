@@ -5,16 +5,49 @@ import { connect } from "react-redux";
 import "./style.scss";
 import { ChangeSelectedUser } from "../../../store/action/chat";
 import GetDate from "../../../common/getDate";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 class MessageBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      lastMessage: ""
+    };
+    this._firestoreGetLastMessage = null;
   }
   handelChangeChat = () => {
-    const { user, changeSelectedUser, roomId } = this.props;
-    changeSelectedUser(user.uid, roomId);
+    const { user, changeSelectedUser } = this.props;
+    changeSelectedUser(user.uid, null);
   };
+  componentDidMount() {
+    const { status, firestore, roomId } = this.props;
+    if (!status) {
+      console.log(roomId);
+
+      if (roomId) {
+        this._firestoreGetLastMessage = firestore
+          .collection("chatRooms")
+          .doc(roomId)
+          .collection("messages")
+          .get()
+          .then(data => {
+            if (!data.empty) {
+              const lastData = data[data.length - 1].data();
+              this.setState({
+                lastMessage: lastData
+              });
+            }
+          });
+      }
+    }
+  }
+  componentWillUnmount() {
+    if (this._firestoreGetLastMessage) {
+      this._firestoreGetLastMessage();
+    }
+  }
+
   render() {
     const { user, status, selectedUser } = this.props;
     const { fullname, image, lastLogin, isLogin, uid } = user;
@@ -66,7 +99,10 @@ const mapStateToProps = (state, ownProps) => {
     selectedUser: state.chat
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect()
 )(MessageBox);

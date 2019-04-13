@@ -37,9 +37,8 @@ class ChatPanel extends React.Component {
       } else {
         createMessage(roomId, uid, message);
       }
-      this.setState({
-        message: ""
-      });
+      this.setState(per => ({ ...per, message: "" }));
+      this.handelFocusOfMessageBox(false, true);
     }
   };
   handelChangeMessage = ({ currentTarget }) => {
@@ -163,10 +162,12 @@ class ChatPanel extends React.Component {
       });
   };
 
-  handelFocusOfMessageBox = bool => {
+  handelFocusOfMessageBox = (bool, force = false) => {
     const { firestore, uid, userID } = this.props;
     const { message } = this.state;
-    if (message.length > 0) return false;
+    if (!force) {
+      if (message.length > 0) return false;
+    }
     this.setState(per => ({ ...per, isFocus: bool }));
     const { chatsRooms } = this.state;
     const room = chatsRooms.find(chat => chat.withUserId === userID);
