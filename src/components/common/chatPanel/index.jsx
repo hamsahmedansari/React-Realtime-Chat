@@ -22,13 +22,18 @@ class ChatPanel extends React.Component {
 
   handelCreateChatRoom = () => {
     const { userID, uid, chat, createMessage, firestore } = this.props;
-    const { message } = this.state;
+    const { message, chatsRooms } = this.state;
+    const room = chatsRooms.find(chat => chat.withUserId === userID);
+    let roomId = room ? room.roomUid : null;
+
     if (message.length > 0) {
-      let roomId = chat.roomId;
       if (!roomId) {
-        CreateChatRoom(firestore, uid, userID).then(id => (roomId = id));
+        CreateChatRoom(firestore, uid, userID).then(id => {
+          createMessage(id, uid, message);
+        });
+      } else {
+        createMessage(roomId, uid, message);
       }
-      createMessage(roomId, uid, message);
       this.setState({
         message: ""
       });
@@ -132,7 +137,7 @@ class ChatPanel extends React.Component {
 
   render() {
     const { userID, user } = this.props;
-    const { chats, message } = this.state;
+    const { chats, message, chatsRooms } = this.state;
 
     const orderedChats = chats.sort((a, b) => {
       let date1 = new Date();
@@ -144,6 +149,11 @@ class ChatPanel extends React.Component {
       // if (a > b) return -1;
       // else return 1;
     });
+
+    // getRoomId
+    const room = chatsRooms.find(chat => chat.withUserId === userID);
+    let roomId = room ? room.roomUid : null;
+
     if (!userID)
       return (
         <div className="item">
@@ -195,7 +205,11 @@ class ChatPanel extends React.Component {
             <div className="flex-container">
               {orderedChats.map((chat, i) => (
                 <div className="item" key={i}>
-                  <Message chat={chat.message} chatId={chat.uid} />
+                  <Message
+                    chat={chat.message}
+                    chatId={chat.uid}
+                    roomId={roomId}
+                  />
                 </div>
               ))}
               {/* <div className="item">

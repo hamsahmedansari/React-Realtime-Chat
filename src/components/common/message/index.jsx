@@ -69,8 +69,8 @@ Message.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     uid: state.firebase.auth.uid,
-    users: state.firestore.ordered.users,
-    roomId: state.chat.roomId
+    users: state.firestore.ordered.users
+    // roomId: state.chat.roomId
   };
 };
 
