@@ -13,9 +13,11 @@ class ChatPanel extends React.Component {
     super(props);
     this.state = {
       chats: [],
+      chatsRooms: [],
       message: ""
     };
     this._fireStoreChatRooms = null;
+    this._fireStoreAllChatRooms = null;
   }
 
   handelCreateChatRoom = () => {
@@ -35,26 +37,70 @@ class ChatPanel extends React.Component {
   handelChangeMessage = ({ currentTarget }) => {
     this.setState(per => ({ ...per, message: currentTarget.value }));
   };
+
+  componentDidMount() {
+    const { uid, firestore } = this.props;
+    this._fireStoreAllChatRooms = firestore
+      .collection("users")
+      .doc(uid)
+      .collection("chatRooms")
+      .onSnapshot(data => {
+        const tempArrayOfChat = [];
+        data.forEach(function(doc) {
+          if (doc && doc.exists) {
+            const { roomUid } = doc.data();
+            const { id } = doc;
+            // DO SOMETHING
+            tempArrayOfChat.push({ roomUid, withUserId: id });
+          }
+        });
+        this.setState({
+          chatsRooms: tempArrayOfChat
+        });
+      });
+  }
+  componentWillUnmount() {
+    if (this._fireStoreAllChatRooms) {
+      this._fireStoreAllChatRooms();
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
     const { userID: newuserID, chat } = this.props;
     const { userID: olduserID } = prevProps;
+    const { chatsRooms, chats } = this.state;
     if (newuserID) {
-      if (olduserID === newuserID || olduserID === "") {
-        console.log("no room change just got update.!");
-        if (chat.roomId) {
-          if (!this._fireStoreChatRooms) {
-            this._fireStoreChatRooms = this.getDataFromFirestore(chat.roomId);
+      const room = chatsRooms.find(chat => chat.withUserId === newuserID);
+      if (room) {
+        if (olduserID === newuserID || olduserID === "") {
+          console.log("no room change just got update.!");
+
+          if (room.roomUid) {
+            if (!this._fireStoreChatRooms) {
+              console.log("now subscribe");
+
+              this._fireStoreChatRooms = this.getDataFromFirestore(
+                room.roomUid
+              );
+            }
           }
+        } else {
+          if (this._fireStoreChatRooms) {
+            this._fireStoreChatRooms();
+          }
+          if (room.roomUid) {
+            console.log("getting data");
+            this._fireStoreChatRooms = this.getDataFromFirestore(room.roomUid);
+          }
+
+          console.log("room change just got update.!");
         }
       } else {
-        if (this._fireStoreChatRooms) {
-          this._fireStoreChatRooms();
-          if (chat.roomId) {
-            this._fireStoreChatRooms = this.getDataFromFirestore(chat.roomId);
+        if (chats.length) {
+          if (this._fireStoreChatRooms) {
+            this._fireStoreChatRooms();
           }
+          this.setState(per => ({ ...per, chats: [] }));
         }
-
-        console.log("room change just got update.!");
       }
     }
   }
