@@ -214,12 +214,22 @@
           }
         }
         > :nth-child(3) {
-          bottom: 0;
+          bottom: -0%;
           left: 0;
           background: #fff;
           border-top: 1px solid rgba(183, 195, 214, 0.3);
           border-bottom: 1px solid rgba(183, 195, 214, 0.3);
           padding: 10px 0;
+          transition: all ease-in-out 0.3s;
+          &.focus {
+            background: #4ca8e6;
+            color: #fff;
+            textarea,
+            textarea::placeholder,
+            path {
+              color: #fff !important;
+            }
+          }
           > div {
             flex-direction: row;
             flex-wrap: wrap;
@@ -294,5 +304,28 @@
     > div > :nth-child(2) {
       height: 300px;
     }
+  }
+  .home > div > :nth-child(3) > div {
+    // position: relative;
+    height: calc(100% - 78px) !important;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .home > div > :nth-child(3) > div > :nth-child(3) > div > :nth-child(1),
+  .home > div > :nth-child(3) > div > :nth-child(3) > div > :nth-child(3) {
+    position: relative;
+    svg {
+      top: -13px;
+      font-size: 26px;
+      right: 18px;
+      // display: block;
+    }
+  }
+  .home > div > :nth-child(3) > div > :nth-child(2) {
+    height: calc(100% - 116px);
+  }
+  .home > div > :nth-child(3) > div > :nth-child(3) {
+    bottom: -2%;
   }
 }

@@ -16,7 +16,8 @@ class ChatPanel extends React.Component {
       chatsRooms: [],
       message: "",
       isLoading: false,
-      isTyping: false
+      isTyping: false,
+      isFocus: false
     };
     this._fireStoreChatRooms = null;
     this._fireStoreAllChatRooms = null;
@@ -164,7 +165,9 @@ class ChatPanel extends React.Component {
 
   handelFocusOfMessageBox = bool => {
     const { firestore, uid, userID } = this.props;
-
+    const { message } = this.state;
+    if (message.length > 0) return false;
+    this.setState(per => ({ ...per, isFocus: bool }));
     const { chatsRooms } = this.state;
     const room = chatsRooms.find(chat => chat.withUserId === userID);
     if (room) {
@@ -185,7 +188,14 @@ class ChatPanel extends React.Component {
   };
   render() {
     const { userID, user } = this.props;
-    const { chats, message, chatsRooms, isLoading, isTyping } = this.state;
+    const {
+      chats,
+      message,
+      chatsRooms,
+      isLoading,
+      isTyping,
+      isFocus
+    } = this.state;
 
     if (isLoading || !userID)
       return (
@@ -299,7 +309,7 @@ class ChatPanel extends React.Component {
             </div>
           </div>
           {/* Action */}
-          <div className="item">
+          <div className={`item ${isFocus ? "focus" : ""}`}>
             <div className="flex-container">
               <div className="item">
                 <div className="fas fa-camera" />
