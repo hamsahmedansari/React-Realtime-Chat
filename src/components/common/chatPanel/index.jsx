@@ -15,7 +15,8 @@ class ChatPanel extends React.Component {
       chats: [],
       chatsRooms: [],
       message: "",
-      isLoading: false
+      isLoading: false,
+      isTyping: false
     };
     this._fireStoreChatRooms = null;
     this._fireStoreAllChatRooms = null;
@@ -71,9 +72,10 @@ class ChatPanel extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { userID: newuserID } = this.props;
+    const { userID: newuserID, uid } = this.props;
     const { userID: olduserID } = prevProps;
     const { chatsRooms, chats, isLoading } = this.state;
+
     if (newuserID) {
       const room = chatsRooms.find(chat => chat.withUserId === newuserID);
       if (room) {
@@ -85,7 +87,8 @@ class ChatPanel extends React.Component {
               console.log("now subscribe");
 
               this._fireStoreChatRooms = this.getDataFromFirestore(
-                room.roomUid
+                room.roomUid,
+                newuserID
               );
             }
           }
@@ -95,7 +98,10 @@ class ChatPanel extends React.Component {
           }
           if (room.roomUid) {
             console.log("getting data");
-            this._fireStoreChatRooms = this.getDataFromFirestore(room.roomUid);
+            this._fireStoreChatRooms = this.getDataFromFirestore(
+              room.roomUid,
+              newuserID
+            );
           }
           console.log("room change just got update.!");
         }
@@ -110,7 +116,7 @@ class ChatPanel extends React.Component {
     }
   }
 
-  getDataFromFirestore = uid => {
+  getDataFromFirestore = (uid, secondUid) => {
     const { firestore } = this.props;
     const { isLoading } = this.state;
     if (!isLoading) this.setState(per => ({ ...per, isLoading: true }));
@@ -132,6 +138,21 @@ class ChatPanel extends React.Component {
               });
             }
           });
+          firestore
+            .collection("chatRooms")
+            .doc(uid)
+            .onSnapshot(doc => {
+              const chatDetails = doc.data();
+              const isTyping = chatDetails.hasOwnProperty(secondUid)
+                ? chatDetails[secondUid]
+                : false;
+              console.log(isTyping, secondUid, chatDetails[secondUid]);
+              this.setState(per => ({
+                ...per,
+                isTyping
+              }));
+            });
+
           this.setState(per => ({
             ...per,
             chats: tempArrayOfMessage,
@@ -141,9 +162,30 @@ class ChatPanel extends React.Component {
       });
   };
 
+  handelFocusOfMessageBox = bool => {
+    const { firestore, uid, userID } = this.props;
+
+    const { chatsRooms } = this.state;
+    const room = chatsRooms.find(chat => chat.withUserId === userID);
+    if (room) {
+      try {
+        firestore
+          .collection("chatRooms")
+          .doc(room.roomUid)
+          .set(
+            {
+              [uid]: bool
+            },
+            { merge: true }
+          );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   render() {
     const { userID, user } = this.props;
-    const { chats, message, chatsRooms, isLoading } = this.state;
+    const { chats, message, chatsRooms, isLoading, isTyping } = this.state;
 
     if (isLoading || !userID)
       return (
@@ -218,6 +260,12 @@ class ChatPanel extends React.Component {
                   />
                 </div>
               ))}
+              {/* isTyping */}
+              {isTyping && (
+                <div className="item">
+                  <IsTyping image={user.image} />
+                </div>
+              )}
               {/* <div className="item">
                 <Message sibling={true} />
               </div>
@@ -249,6 +297,8 @@ class ChatPanel extends React.Component {
                   placeholder="Enter Message"
                   onChange={this.handelChangeMessage}
                   value={message}
+                  onFocus={() => this.handelFocusOfMessageBox(true)}
+                  onBlur={() => this.handelFocusOfMessageBox(false)}
                 />
               </div>
               <div className="item">
