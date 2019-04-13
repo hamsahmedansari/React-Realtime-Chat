@@ -251,15 +251,27 @@ class ChatPanel extends React.Component {
           {/* Chat */}
           <div className="item">
             <div className="flex-container">
-              {orderedChats.map((chat, i) => (
-                <div className="item" key={i}>
-                  <Message
-                    chat={chat.message}
-                    chatId={chat.uid}
-                    roomId={roomId}
-                  />
-                </div>
-              ))}
+              {orderedChats.map((chat, i) => {
+                let nextMessage = i > 0 ? orderedChats[i - 1] : false;
+                let sibling = false;
+                if (nextMessage) {
+                  if (
+                    nextMessage.message.createdBy === chat.message.createdBy
+                  ) {
+                    sibling = true;
+                  }
+                }
+                return (
+                  <div className="item" key={i}>
+                    <Message
+                      chat={chat.message}
+                      chatId={chat.uid}
+                      roomId={roomId}
+                      sibling={sibling}
+                    />
+                  </div>
+                );
+              })}
               {/* isTyping */}
               {isTyping && (
                 <div className="item">
