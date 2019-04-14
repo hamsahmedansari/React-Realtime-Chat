@@ -168,9 +168,9 @@ const mapStateToProps = (state, ownProps) => {
     selectedUser: state.chat
   };
 };
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
-};
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {};
+// };
 export default compose(
   connect(
     mapStateToProps,

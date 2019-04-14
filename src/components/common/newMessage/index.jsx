@@ -15,7 +15,7 @@ class NewMessage extends Component {
   }
   componentDidMount() {
     const { uid, firestore } = this.props;
-    const { chatRooms } = this.state;
+    // const { chatRooms } = this.state;
     this.ChatSubscription = firestore
       .collection("users")
       .doc(uid)

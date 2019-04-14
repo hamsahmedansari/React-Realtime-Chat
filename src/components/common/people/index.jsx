@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 import MessageBox from "../messageBox";
-import GetDate from "../../../common/getDate";
+// import GetDate from "../../../common/getDate";
 
 const People = props => {
   if (!props.users) return false;
@@ -33,10 +33,10 @@ const People = props => {
         if (user.uid === props.currentUserUid) {
           return false;
         }
-        let date = "";
-        if (!user.isLogin) {
-          date = GetDate(user.lastLogin);
-        }
+        // let date = "";
+        // if (!user.isLogin) {
+        //   date = GetDate(user.lastLogin);
+        // }
         return (
           <div className="item" key={i}>
             <MessageBox status={true} user={user} />

@@ -24,7 +24,7 @@ class ChatPanel extends React.Component {
   }
 
   handelCreateChatRoom = () => {
-    const { userID, uid, chat, createMessage, firestore } = this.props;
+    const { userID, uid, createMessage, firestore } = this.props;
     const { message, chatsRooms } = this.state;
     const room = chatsRooms.find(chat => chat.withUserId === userID);
     let roomId = room ? room.roomUid : null;
@@ -72,19 +72,19 @@ class ChatPanel extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { userID: newuserID, uid } = this.props;
+    const { userID: newuserID } = this.props;
     const { userID: olduserID } = prevProps;
-    const { chatsRooms, chats, isLoading } = this.state;
+    const { chatsRooms, chats } = this.state;
 
     if (newuserID) {
       const room = chatsRooms.find(chat => chat.withUserId === newuserID);
       if (room) {
         if (olduserID === newuserID || olduserID === "") {
-          console.log("no room change just got update.!");
+          // console.log("no room change just got update.!");
 
           if (room.roomUid) {
             if (!this._fireStoreChatRooms) {
-              console.log("now subscribe");
+              // console.log("now subscribe");
 
               this._fireStoreChatRooms = this.getDataFromFirestore(
                 room.roomUid,
@@ -97,13 +97,13 @@ class ChatPanel extends React.Component {
             this._fireStoreChatRooms();
           }
           if (room.roomUid) {
-            console.log("getting data");
+            // console.log("getting data");
             this._fireStoreChatRooms = this.getDataFromFirestore(
               room.roomUid,
               newuserID
             );
           }
-          console.log("room change just got update.!");
+          // console.log("room change just got update.!");
         }
       } else {
         if (chats.length) {
@@ -146,7 +146,7 @@ class ChatPanel extends React.Component {
               const isTyping = chatDetails.hasOwnProperty(secondUid)
                 ? chatDetails[secondUid]
                 : false;
-              console.log(isTyping, secondUid, chatDetails[secondUid]);
+              // console.log(isTyping, secondUid, chatDetails[secondUid]);
               this.setState(per => ({
                 ...per,
                 isTyping
@@ -183,7 +183,7 @@ class ChatPanel extends React.Component {
             { merge: true }
           );
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };

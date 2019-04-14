@@ -23,7 +23,7 @@ class MessageBox extends Component {
   componentDidMount() {
     const { status, firestore, roomId } = this.props;
     if (!status) {
-      console.log(roomId);
+      // console.log(roomId);
 
       if (roomId) {
         this._firestoreGetLastMessage = firestore

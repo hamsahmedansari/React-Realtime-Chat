@@ -13,7 +13,6 @@ const Online = props => {
         if (user.uid === props.currentUserUid) {
           return false;
         }
-        let date = "";
         if (!user.isLogin) {
           return false;
         }
