@@ -88,7 +88,14 @@ class MessageBox extends Component {
           )}
         </div>
         <div className="item">
-          <p>{isLogin ? null : GetDate(lastLogin)}</p>
+          {/* <p>{}</p> */}
+          <p>
+            {status
+              ? isLogin
+                ? null
+                : GetDate(lastLogin)
+              : GetDate(lastMessage.createAt)}
+          </p>
           <p className={isLogin ? "online" : ""}>
             <i className="fas fa-dot-circle" />
           </p>
