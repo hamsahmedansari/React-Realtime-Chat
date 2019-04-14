@@ -186,6 +186,7 @@
         > :nth-child(2) {
           top: 70px;
           height: calc(100% - 128px);
+          overflow-x: hidden;
           overflow-y: scroll;
           left: 0;
           > div {
