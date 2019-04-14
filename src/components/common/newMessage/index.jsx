@@ -28,7 +28,7 @@ class NewMessage extends Component {
             const { id } = doc;
             // DO SOMETHING
             tempArrayOfChat.push({
-              // roomUid,
+              roomUid,
               userUid: id
             });
           }
@@ -50,7 +50,7 @@ class NewMessage extends Component {
         for (const room of chatRooms) {
           if (room.userUid === user.id) {
             return {
-              // chatRoomId: room.roomUid,
+              chatRoomId: room.roomUid,
               user
             };
           }
@@ -64,8 +64,8 @@ class NewMessage extends Component {
         {myUsersWithChat &&
           myUsersWithChat.map((chat, i) => (
             <div className="item" key={i}>
-              <MessageBox user={chat.user} />
-              {/* <MessageBox user={chat.user} roomId={chat.chatRoomId} /> */}
+              {/* <MessageBox user={chat.user} roomId={} /> */}
+              <MessageBox user={chat.user} roomId={chat.chatRoomId} />
             </div>
           ))}
       </React.Fragment>

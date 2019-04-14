@@ -30,13 +30,14 @@ class MessageBox extends Component {
           .collection("chatRooms")
           .doc(roomId)
           .collection("messages")
-          .get()
-          .then(data => {
+          .orderBy("createAt", "desc")
+          .limit(1)
+          .onSnapshot(data => {
             if (!data.empty) {
-              const lastData = data[data.length - 1].data();
-              this.setState({
-                lastMessage: lastData
-              });
+              const doc = data.docs[0];
+              if (doc && doc.exists) {
+                this.setState(per => ({ ...per, lastMessage: doc.data() }));
+              }
             }
           });
       }
@@ -51,8 +52,24 @@ class MessageBox extends Component {
   render() {
     const { user, status, selectedUser } = this.props;
     const { fullname, image, lastLogin, isLogin, uid } = user;
+    const { lastMessage } = this.state;
     const active = selectedUser.uid === uid ? true : false;
-    const message = "i am dummy message";
+    let message = null;
+    let icon = null;
+    if (!status) {
+      icon =
+        lastMessage.createdBy !== uid
+          ? lastMessage.isSeen
+            ? "Seen"
+            : "Sent"
+          : "Reply";
+      message =
+        String(lastMessage.message).length <= 40
+          ? lastMessage.message
+          : String(lastMessage.message)
+              .slice(0, 40)
+              .concat("...");
+    }
     return (
       <div
         className={`messageBox flex-container ${active ? "active" : ""}`}
@@ -65,11 +82,8 @@ class MessageBox extends Component {
           <h4>{fullname}</h4>
           {!status && (
             <p>
-              {String(message).length >= 40
-                ? message
-                : String(message)
-                    .slice(0, 40)
-                    .concat("...")}
+              <span className={`checkboxpath ${icon}`} /> &nbsp;
+              {message}
             </p>
           )}
         </div>

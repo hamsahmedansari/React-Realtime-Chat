@@ -18,6 +18,8 @@
       }
     }
   }
+  &.hasMessage {
+  }
   //   height: 80px;
   > div {
     &.active {
@@ -67,6 +69,31 @@
     .online {
       path {
         color: #8bc34a !important;
+      }
+    }
+  }
+  .checkboxpath {
+    margin-top: 5px;
+    color: rgba(101, 107, 129, 0.63);
+    &.Seen {
+      &::after {
+        font-family: "Font Awesome\ 5 Free";
+        content: "\f560";
+        font-weight: 900;
+      }
+    }
+    &.Reply {
+      &::after {
+        font-family: "Font Awesome\ 5 Free";
+        content: "\f3e5";
+        font-weight: 900;
+      }
+    }
+    &.Sent {
+      &::after {
+        font-family: "Font Awesome\ 5 Free";
+        content: "\f00c";
+        font-weight: 900;
       }
     }
   }
