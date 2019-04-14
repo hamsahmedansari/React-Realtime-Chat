@@ -72,7 +72,17 @@ class MessageBox extends Component {
     }
     return (
       <div
-        className={`messageBox flex-container ${active ? "active" : ""}`}
+        className={`messageBox flex-container ${active ? "active" : ""} ${
+          !status
+            ? lastMessage
+              ? lastMessage.createdBy === uid
+                ? !lastMessage.isSeen
+                  ? "notSeen"
+                  : null
+                : null
+              : null
+            : null
+        }`}
         onClick={this.handelChangeChat}
       >
         <div className="item">

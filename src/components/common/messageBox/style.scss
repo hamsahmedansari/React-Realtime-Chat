@@ -18,7 +18,8 @@
       }
     }
   }
-  &.hasMessage {
+  &.notSeen {
+    background: #f2f4f8;
   }
   //   height: 80px;
   > div {
