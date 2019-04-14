@@ -8,7 +8,8 @@ import { getFirestore, reduxFirestore } from "redux-firestore";
 import allReducer from "./reducers";
 import fbconfig from "../firebase/";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk.withExtraArgument({ getFirebase, getFirestore })

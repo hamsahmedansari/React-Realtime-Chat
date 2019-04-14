@@ -1,0 +1,38 @@
+[debug] [2019-04-14T17:38:14.726Z] ----------------------------------------------------------------------
+[debug] [2019-04-14T17:38:14.730Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-04-14T17:38:14.730Z] CLI Version:   6.6.0
+[debug] [2019-04-14T17:38:14.731Z] Platform:      linux
+[debug] [2019-04-14T17:38:14.731Z] Node Version:  v11.10.0
+[debug] [2019-04-14T17:38:14.731Z] Time:          Sun Apr 14 2019 22:38:14 GMT+0500 (Pakistan Standard Time)
+[debug] [2019-04-14T17:38:14.731Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-04-14T17:38:14.753Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-14T17:38:14.753Z] > authorizing via signed-in user
+[debug] [2019-04-14T17:38:14.753Z] [iam] checking project react-chat-3cb5c for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-04-14T17:38:14.756Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-04-14T17:38:14.756Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-04-14T17:38:15.279Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-14T17:38:15.321Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/react-chat-3cb5c:testIamPermissions  
+
+[debug] [2019-04-14T17:38:17.154Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-14T17:38:17.156Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/react-chat-3cb5c  
+ 
+[debug] [2019-04-14T17:38:17.848Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'react-chat-3cb5c'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-04-14T17:38:17.853Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/react-chat-3cb5c/versions  
+
+[debug] [2019-04-14T17:38:20.510Z] <<< HTTP RESPONSE 200
+[info] i  hosting[react-chat-3cb5c]: beginning deploy...
+[info] i  hosting[react-chat-3cb5c]: found 45 files in build
+[debug] [2019-04-14T17:38:20.569Z] [hosting] hash cache [YnVpbGQ] load error: lines is not defined
+[debug] [2019-04-14T17:38:22.152Z] [hosting] hash cache [YnVpbGQ] stored for 45 files
+[debug] [2019-04-14T17:38:22.152Z] [hosting][hash queue][FINAL]
+[debug] [2019-04-14T17:38:22.152Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/react-chat-3cb5c/versions/1d49ec1323a06a4b:populateFiles  
+ <request body omitted>
+[debug] [2019-04-14T17:38:24.451Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-14T17:38:24.457Z] [hosting][populate queue][FINAL]
+[debug] [2019-04-14T17:38:24.457Z] [hosting] uploads queued: 8

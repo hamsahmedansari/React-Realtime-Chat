@@ -1,8 +1,8 @@
 export default {
-  apiKey: "AIzaSyCspseAH2VQNpWNHFCSSNCf6bvLgPG5sm0",
-  authDomain: "react-chat-3cb5c.firebaseapp.com",
-  databaseURL: "https://react-chat-3cb5c.firebaseio.com",
-  projectId: "react-chat-3cb5c",
-  storageBucket: "react-chat-3cb5c.appspot.com",
-  messagingSenderId: "443045259344"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 };

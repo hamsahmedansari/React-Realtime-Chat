@@ -95,7 +95,7 @@ class Home extends Component {
                       visible === "newMessage" ? "active" : ""
                     }`}
                   >
-                    <p>New Message (2)</p>
+                    <p>New Message</p>
                   </div>
                   <div
                     onClick={() => this.handleChangeNav("people")}
