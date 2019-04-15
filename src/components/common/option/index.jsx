@@ -9,7 +9,8 @@ class Option extends Component {
     super(props);
     this.state = {
       username: "",
-      img: ""
+      img: "",
+      isError: false
     };
   }
   selectImage = ({ currentTarget }) => {
@@ -23,8 +24,15 @@ class Option extends Component {
     });
   };
   handelUsername = ({ currentTarget }) => {
+    if (currentTarget.value.length >= 15) {
+      this.setState({
+        isError: true
+      });
+      return false;
+    }
     this.setState({
-      username: currentTarget.value
+      username: currentTarget.value,
+      isError: false
     });
   };
   render() {
@@ -57,6 +65,7 @@ class Option extends Component {
                   marginTop: "13px",
                   borderRadius: "100px"
                 }}
+                className={this.state.isError ? "error" : ""}
                 placeholder="Full Name"
                 onChange={this.handelUsername}
                 value={this.state.username}
@@ -78,7 +87,13 @@ class Option extends Component {
                 className="btn "
                 style={{ display: "inline" }}
                 disabled={
-                  this.state.username ? (this.state.img ? false : true) : true
+                  !this.state.isError
+                    ? this.state.username
+                      ? this.state.img
+                        ? false
+                        : true
+                      : true
+                    : true
                 }
                 onClick={() => this.props.anonymouslyLogin(this.state)}
               >
